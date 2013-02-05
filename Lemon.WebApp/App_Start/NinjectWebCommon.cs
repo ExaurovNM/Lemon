@@ -7,6 +7,8 @@ namespace Lemon.WebApp.App_Start
     using System.Web;
 
     using Lemon.DataAccess.Repositories;
+    using Lemon.WebApp.Controllers;
+    using Lemon.WebApp.Services;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -56,6 +58,7 @@ namespace Lemon.WebApp.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
+            kernel.Bind<IAuthService>().To<AuthService>();
         }        
     }
 }

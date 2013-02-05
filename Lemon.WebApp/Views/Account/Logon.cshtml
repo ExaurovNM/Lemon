@@ -1,13 +1,15 @@
-﻿@model Lemon.WebApp.Models.RegisterViewModel
+﻿@model Lemon.WebApp.Controllers.LogonViewModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Logon";
 }
 
-<h2>Register</h2>
+<h2>Logon</h2>
 
 @using(Html.BeginForm())
 {
+    @Html.ValidationSummary(true)
+    
     @Html.LabelFor(model => model.Email)
     @Html.TextBoxFor(model => model.Email)
     @Html.ValidationMessageFor(model => model.Email)
@@ -17,11 +19,6 @@
     @Html.PasswordFor(model => model.Password)
     @Html.ValidationMessageFor(model => model.Password)
     <br/>
-
-    @Html.LabelFor(model => model.ConfirmPassword)
-    @Html.PasswordFor(model => model.ConfirmPassword)
-    @Html.ValidationMessageFor(model => model.ConfirmPassword)
-    <br/>
-
-    <input type="submit" value="Зарегаться"/>
+    
+     <input type="submit" value="Войти"/>
 }

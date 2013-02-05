@@ -1,23 +1,14 @@
 ﻿namespace Lemon.DataAccess.Repositories
 {
-    using Lemon.DataAccess.Context;
+    using System;
+    using System.Collections.Generic;
+
     using Lemon.DataAccess.DomainModels;
 
     public interface IAccountRepository
     {
         void Create(string email, string password);
-    }
 
-    public class AccountRepository : IAccountRepository
-    {
-        public void Create(string email, string password)
-        {
-            using (var context = new DataBaseContext())
-            {
-                var account = new Account { Email = email, PasswordHash = password };
-                context.Accounts.Add(account);
-                context.SaveChanges();
-            }
-        }
+        IEnumerable<Account> Items();
     }
 }

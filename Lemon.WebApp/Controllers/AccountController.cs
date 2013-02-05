@@ -4,14 +4,17 @@ namespace Lemon.WebApp.Controllers
 {
     using Lemon.DataAccess.Repositories;
     using Lemon.WebApp.Models;
+    using Lemon.WebApp.Services;
 
     public class AccountController : Controller
     {
         private readonly IAccountRepository accountRepository;
+        private readonly IAuthService authService;
 
-        public AccountController(IAccountRepository accountRepository)
+        public AccountController(IAccountRepository accountRepository, IAuthService authService)
         {
             this.accountRepository = accountRepository;
+            this.authService = authService;
         }
 
         public ActionResult Register()
@@ -25,9 +28,40 @@ namespace Lemon.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                accountRepository.Create(model.Email, model.Password);
+                authService.CreateAccount(model.Email, model.Password);
+                authService.Logon(model.Email);
             }
             return View();
         }
+
+        public ActionResult Logon()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Logon(LogonViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if(authService.Validate(model.Email, model.Password))
+                {
+                    authService.Logon(model.Email, model.Remember);
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError(string.Empty, "Пароль или емеил неправильные. Повторите ввод.");
+                return View(model);
+            }
+            return View(model);
+        }
+    }
+
+    public class LogonViewModel
+    {
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+
+        public bool Remember { get; set; }
     }
 }
