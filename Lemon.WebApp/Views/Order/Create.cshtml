@@ -1,0 +1,26 @@
+﻿@model Lemon.WebApp.Models.OrderCreateViewModel
+
+@{
+    ViewBag.Title = "Создать задание";
+}
+
+<h2>Создать задание</h2>
+
+@using(Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    
+    @Html.HiddenFor(model => model.UserId)
+    
+    @Html.LabelFor(model => model.Title)
+    @Html.TextBoxFor(model => model.Title)
+    @Html.ValidationMessageFor(model => model.Title)
+    <br/>
+    
+    @Html.LabelFor(model => model.Content)
+    @Html.TextAreaFor(model => model.Content)
+    @Html.ValidationMessageFor(model => model.Content)
+    <br/>
+    
+     <input type="submit" value="Создать"/>
+}

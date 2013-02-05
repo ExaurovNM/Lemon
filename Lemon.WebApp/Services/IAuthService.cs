@@ -1,5 +1,7 @@
 namespace Lemon.WebApp.Services
 {
+    using Lemon.DataAccess.DomainModels;
+
     public interface IAuthService
     {
         void CreateAccount(string email, string password);
@@ -7,5 +9,9 @@ namespace Lemon.WebApp.Services
         void Logon(string email, bool remember = false);
 
         bool Validate(string email, string password);
+
+        void Logout();
+
+        Account GetCurrentUser();
     }
 }

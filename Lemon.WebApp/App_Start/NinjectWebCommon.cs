@@ -59,6 +59,8 @@ namespace Lemon.WebApp.App_Start
         {
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
             kernel.Bind<IAuthService>().To<AuthService>();
+            kernel.Bind<IOrderService>().To<OrderService>();
+            kernel.Bind<IOrderRepository>().To<OrderRepository>();
         }        
     }
 }

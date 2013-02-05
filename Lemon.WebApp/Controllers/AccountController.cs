@@ -30,6 +30,7 @@ namespace Lemon.WebApp.Controllers
             {
                 authService.CreateAccount(model.Email, model.Password);
                 authService.Logon(model.Email);
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
@@ -54,14 +55,11 @@ namespace Lemon.WebApp.Controllers
             }
             return View(model);
         }
-    }
 
-    public class LogonViewModel
-    {
-        public string Email { get; set; }
-
-        public string Password { get; set; }
-
-        public bool Remember { get; set; }
+        public ActionResult Logout()
+        {
+            authService.Logout();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
