@@ -8,9 +8,14 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="main-content">
-        @Html.Partial("Menu")
-        @RenderBody()
+    <div class="root">
+        <div class="hidder">
+            @Html.Partial("Menu")
+
+        </div>
+        <div class="main-content">
+            @RenderBody()
+        </div>
     </div>
 
 

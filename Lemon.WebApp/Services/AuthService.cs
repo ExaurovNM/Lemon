@@ -9,6 +9,7 @@ namespace Lemon.WebApp.Services
 
     public class AuthService : IAuthService
     {
+        
         private readonly IAccountRepository accountRepository;
 
         public AuthService(IAccountRepository accountRepository)

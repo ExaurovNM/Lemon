@@ -1,5 +1,12 @@
-﻿@model dynamic
+﻿@model Lemon.WebApp.Controllers.MainPageViewModel
 
 @{
     ViewBag.Title = "Just a test";
+}
+
+@foreach(var order in Model.Orders)
+{
+    <p class="order-title">@order.Title</p>
+    <p>@order.Content</p>
+    
 }

@@ -62,10 +62,6 @@ textarea {
 
 /*Main*/
 
-.main-content {
-    width: 960px;
-    margin: auto;
-}
 
 
 
@@ -73,13 +69,9 @@ textarea {
 
 /*----------------------------*/
 
-.nav_list {
-    padding: 0px;
-}
 
-.nav_list li {
-    display: inline;
-    list-style-type: none;
-    padding-right: 20px;
-}
 
+/*------------------------------*/
+.order-title {
+    font-weight: bold;
+}
