@@ -2,18 +2,18 @@
 
 namespace Lemon.WebApp.Controllers
 {
-    using Lemon.DataAccess.Repositories;
+    using System;
+
+    using Lemon.DataAccess.Repositories; 
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
 
     public class AccountController : Controller
     {
-        private readonly IAccountRepository accountRepository;
         private readonly IAuthService authService;
 
-        public AccountController(IAccountRepository accountRepository, IAuthService authService)
+        public AccountController(IAuthService authService)
         {
-            this.accountRepository = accountRepository;
             this.authService = authService;
         }
 
@@ -28,7 +28,16 @@ namespace Lemon.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                authService.CreateAccount(model.Email, model.Password);
+                try
+                {
+                    authService.CreateAccount(model.Email, model.Password);
+                }
+                catch (ArgumentException)
+                {
+                    ModelState.AddModelError("Email", "Этот e-mail уже используется.");
+                    return View(model);
+                }
+               
                 authService.Logon(model.Email);
                 return RedirectToAction("Index", "Home");
             }

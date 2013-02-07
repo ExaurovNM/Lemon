@@ -75,3 +75,25 @@ textarea {
 .order-title {
     font-weight: bold;
 }
+
+/*FORMS*/
+
+.form-item {
+    margin-left: 40px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-item label {
+    width: 100px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+}
+
+input[type="text"] {
+    width: 250px;
+    height: 28px;
+    box-shadow: inset 1px 1px 0px rgba(0,0,0,0.3);
+    font-size: 16px;
+}

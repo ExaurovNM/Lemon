@@ -1,5 +1,6 @@
 namespace Lemon.WebApp.Services
 {
+    using System;
     using System.Linq;
     using System.Web;
     using System.Web.Security;
@@ -19,6 +20,12 @@ namespace Lemon.WebApp.Services
 
         public void CreateAccount(string email, string password)
         {
+            var existingAccount = accountRepository.GetByEmail(email);
+            if (existingAccount != null)
+            {
+               throw new ArgumentException("Email is already used");
+            }
+
             accountRepository.Create(email, password);
         }
 
