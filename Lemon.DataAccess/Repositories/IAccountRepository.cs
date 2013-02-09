@@ -7,10 +7,10 @@
 
     public interface IAccountRepository
     {
-        void Create(string email, string password);
-
         IEnumerable<Account> Items();
 
         Account GetByEmail(string email);
+
+        void Create(Account account);
     }
 }

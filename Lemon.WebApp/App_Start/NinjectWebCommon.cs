@@ -6,6 +6,7 @@ namespace Lemon.WebApp.App_Start
     using System;
     using System.Web;
 
+    using Lemon.Common;
     using Lemon.DataAccess.Repositories;
     using Lemon.WebApp.Controllers;
     using Lemon.WebApp.Services;
@@ -61,6 +62,7 @@ namespace Lemon.WebApp.App_Start
             kernel.Bind<IAuthService>().To<AuthService>();
             kernel.Bind<IOrderService>().To<OrderService>();
             kernel.Bind<IOrderRepository>().To<OrderRepository>();
+            kernel.Bind<ICriptoProvider>().To<CriptoProvider>();
         }        
     }
 }

@@ -1,27 +1,28 @@
 ﻿@model Lemon.WebApp.Models.RegisterViewModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Регистрация";
 }
 
-<h2>Register</h2>
+<h2>Регистрация</h2>
 
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Email)
-    @Html.TextBoxFor(model => model.Email)
-    @Html.ValidationMessageFor(model => model.Email)
-    <br/>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password)
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
     
-    @Html.LabelFor(model => model.Password)
-    @Html.PasswordFor(model => model.Password)
-    @Html.ValidationMessageFor(model => model.Password)
-    <br/>
-
-    @Html.LabelFor(model => model.ConfirmPassword)
-    @Html.PasswordFor(model => model.ConfirmPassword)
-    @Html.ValidationMessageFor(model => model.ConfirmPassword)
-    <br/>
-
-    <input type="submit" value="Зарегаться"/>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ConfirmPassword)
+        @Html.PasswordFor(model => model.ConfirmPassword)
+        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+    </div>
+    <input type="submit" value="Зарегаться" />
 }

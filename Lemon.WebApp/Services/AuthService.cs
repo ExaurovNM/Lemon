@@ -5,6 +5,7 @@ namespace Lemon.WebApp.Services
     using System.Web;
     using System.Web.Security;
 
+    using Lemon.Common;
     using Lemon.DataAccess.DomainModels;
     using Lemon.DataAccess.Repositories;
 
@@ -12,10 +13,12 @@ namespace Lemon.WebApp.Services
     {
         
         private readonly IAccountRepository accountRepository;
+        private readonly ICriptoProvider criptoProvider;
 
-        public AuthService(IAccountRepository accountRepository)
+        public AuthService(IAccountRepository accountRepository, ICriptoProvider criptoProvider)
         {
             this.accountRepository = accountRepository;
+            this.criptoProvider = criptoProvider;
         }
 
         public void CreateAccount(string email, string password)
@@ -26,7 +29,14 @@ namespace Lemon.WebApp.Services
                throw new ArgumentException("Email is already used");
             }
 
-            accountRepository.Create(email, password);
+            var salt = Guid.NewGuid().ToString();
+            var account = new Account
+                {
+                    Email = email, 
+                    PasswordHash = criptoProvider.ComputeHash(password, salt), 
+                    Salt = salt
+                };
+            accountRepository.Create(account);
         }
 
         public void Logon(string email, bool remember = false)
@@ -36,8 +46,13 @@ namespace Lemon.WebApp.Services
 
         public bool Validate(string email, string password)
         {
-            var accounts = accountRepository.Items();
-            return accounts.Any(account => account.Email == email && account.PasswordHash == password);
+            var account = accountRepository.GetByEmail(email);
+            if (account == null)
+            {
+                return false;
+            }
+            var hashedPassword = criptoProvider.ComputeHash(password, account.Salt);
+            return hashedPassword == account.PasswordHash;
         }
 
         public void Logout()

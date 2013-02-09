@@ -244,6 +244,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lemon.Common\Lemon.Common.csproj">
+      <Project>{FD3B91C4-BDA3-40AD-9B6C-FE23E7798B9F}</Project>
+      <Name>Lemon.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lemon.DataAccess\Lemon.DataAccess.csproj">
       <Project>{2bbf8565-3143-492c-9cac-73912a0729ea}</Project>
       <Name>Lemon.DataAccess</Name>

@@ -1,24 +1,27 @@
 ﻿@model Lemon.WebApp.Models.LogonViewModel
 
 @{
-    ViewBag.Title = "Logon";
+    ViewBag.Title = "Вход";
 }
 
-<h2>Logon</h2>
+<h2>Вход</h2>
 
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     
-    @Html.LabelFor(model => model.Email)
-    @Html.TextBoxFor(model => model.Email)
-    @Html.ValidationMessageFor(model => model.Email)
-    <br/>
+    <div class="form-item">
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+
+    <div class="form-item">
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password)
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+
     
-    @Html.LabelFor(model => model.Password)
-    @Html.PasswordFor(model => model.Password)
-    @Html.ValidationMessageFor(model => model.Password)
-    <br/>
-    
-     <input type="submit" value="Войти"/>
+    <input type="submit" value="Войти" />
 }

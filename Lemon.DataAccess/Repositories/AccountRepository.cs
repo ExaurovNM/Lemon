@@ -9,16 +9,6 @@ namespace Lemon.DataAccess.Repositories
 
     public class AccountRepository : IAccountRepository
     {
-        public void Create(string email, string password)
-        {
-            using (var context = new DataBaseContext())
-            {
-                var account = new Account { Email = email, PasswordHash = password, CretedTime = DateTime.UtcNow };
-                context.Accounts.Add(account);
-                context.SaveChanges();
-            }
-        }
-
         public IEnumerable<Account> Items()
         {
             using (var context = new DataBaseContext())
@@ -32,6 +22,16 @@ namespace Lemon.DataAccess.Repositories
             using (var context = new DataBaseContext())
             {
                 return context.Accounts.FirstOrDefault(account => account.Email == email);
+            }
+        }
+
+        public void Create(Account account)
+        {
+            using (var context = new DataBaseContext())
+            {
+                account.CretedTime = DateTime.UtcNow;
+                context.Accounts.Add(account);
+                context.SaveChanges();
             }
         }
     }
