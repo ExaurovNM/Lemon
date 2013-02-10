@@ -11,6 +11,8 @@
         void Create(Order order);
 
         List<Order> Items();
+
+        Order GetById(int id);
     }
 
     class OrderService : IOrderService
@@ -30,6 +32,11 @@
         public List<Order> Items()
         {
             return orderRepository.Items();
+        }
+
+        public Order GetById(int id)
+        {
+            return orderRepository.GetById(id);
         }
     }
 }

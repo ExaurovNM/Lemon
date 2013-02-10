@@ -1,0 +1,10 @@
+﻿@using Lemon.Common
+@model Lemon.WebApp.Controllers.OrderViewModel
+
+@{
+    ViewBag.Title = Model.Title.AutoEllipses(16);
+}
+
+<h2> @Model.Title</h2>
+<p>Описание заказа</p>
+@Model.Content

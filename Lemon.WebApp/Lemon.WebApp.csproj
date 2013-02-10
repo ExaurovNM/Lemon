@@ -238,6 +238,7 @@
     <Content Include="Views\Account\Logon.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

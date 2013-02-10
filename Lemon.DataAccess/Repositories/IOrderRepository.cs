@@ -12,6 +12,8 @@
         void Create(Order order);
 
         List<Order> Items();
+
+        Order GetById(int id);
     }
 
     public class OrderRepository : IOrderRepository
@@ -32,7 +34,14 @@
             {
                 return context.Orders.Include("Account").ToList();
             }
+        }
 
+        public Order GetById(int id)
+        {
+            using (var context = new DataBaseContext())
+            {
+                return context.Orders.Include("Account").FirstOrDefault(order => order.Id == id);
+            }
         }
     }
 }

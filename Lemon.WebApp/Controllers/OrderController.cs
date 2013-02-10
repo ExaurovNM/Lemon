@@ -45,5 +45,13 @@ namespace Lemon.WebApp.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Details(int id)
+        {
+            var order = orderService.GetById(id);
+            var model = new OrderViewModel(order);
+
+            return View(model);
+        }
     }
 }

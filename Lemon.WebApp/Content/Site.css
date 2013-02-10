@@ -58,7 +58,11 @@ legend {
 
 /*Main*/
 
-
+.autoellipses {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 
 
@@ -70,6 +74,32 @@ legend {
 /*------------------------------*/
 .order-title {
     font-weight: bold;
+    width: 250px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.order-title:visited {
+    color: rgb(100, 100, 100)
+}
+
+.order-title:hover {
+    text-decoration: underline;
+}
+
+
+.order-time {
+    margin-left: 50px;
+    display: inline-block;
+    color: rgba(0,0,0, 0.7);
+}
+
+.order-content {
+    width: 400px;
+    height: 100px;
+    word-wrap: break-word;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 /*FORMS*/
@@ -100,4 +130,5 @@ textarea {
     height: 150px;
     resize: none;
     box-shadow: inset 1px 1px 0px rgba(0,0,0,0.3);
+    font-size: 16px;
 }

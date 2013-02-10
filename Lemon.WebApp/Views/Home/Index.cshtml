@@ -1,12 +1,15 @@
-﻿@model Lemon.WebApp.Controllers.MainPageViewModel
+﻿@using Lemon.Common
+@model Lemon.WebApp.Controllers.MainPageViewModel
 
 @{
     ViewBag.Title = "Just a test";
 }
 
-@foreach(var order in Model.Orders)
+@foreach (var order in Model.Orders)
 {
-    <p class="order-title">@order.Title</p>
-    <p>@order.Content</p>
-    
+    <div class="order-preview-holder">
+        @Html.ActionLink(order.Title, "Details", "Order", new { id = order.Id }, new {@class = "autoellipses order-title"})
+        <span class="order-time">@order.CreatedTimeOut</span>
+        <div class="order-content ">@order.Content.AutoEllipses(100)</div>
+    </div>
 }

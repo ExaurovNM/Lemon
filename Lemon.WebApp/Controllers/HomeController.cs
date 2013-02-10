@@ -6,6 +6,7 @@ namespace Lemon.WebApp.Controllers
     using System.Collections.Generic;
     using System.Linq;
 
+    using Lemon.Common;
     using Lemon.DataAccess.DomainModels;
     using Lemon.WebApp.Services;
 
@@ -35,11 +36,20 @@ namespace Lemon.WebApp.Controllers
     {
         public OrderViewModel(Order order)
         {
+            if (order == null)
+            {
+                return;
+            }
             OwnerId = order.AccountId;
             Title = order.Title;
             Content = order.Content;
             OwnerDisplayName = order.Account.Email;
             CreatedTime = order.CretedTime;
+            Id = order.Id;
+        }
+
+        public OrderViewModel()
+        {
         }
 
         public int OwnerId { get; set; }
@@ -50,6 +60,16 @@ namespace Lemon.WebApp.Controllers
 
         public string Content { get; set; }
 
-        public DateTime CreatedTime { get; set; } 
+        public DateTime CreatedTime { get; set; }
+
+        public string CreatedTimeOut
+        {
+            get
+            {
+                return DateTimeHelper.GetOutTime(CreatedTime);
+            }
+        }
+
+        public object Id { get; set; }
     }
 }

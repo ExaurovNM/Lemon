@@ -44,7 +44,7 @@ namespace Lemon.WebApp.Controllers
             return View();
         }
 
-        public ActionResult Logon()
+        public ActionResult Logon( )
         {
             return View();
         }
