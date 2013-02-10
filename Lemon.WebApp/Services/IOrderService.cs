@@ -13,6 +13,8 @@
         List<Order> Items();
 
         Order GetById(int id);
+
+        void AddCommentToOrder(OrderComment orderComment);
     }
 
     class OrderService : IOrderService
@@ -37,6 +39,11 @@
         public Order GetById(int id)
         {
             return orderRepository.GetById(id);
+        }
+
+        public void AddCommentToOrder(OrderComment orderComment)
+        {
+            orderRepository.AddCommentToOrder(orderComment);
         }
     }
 }

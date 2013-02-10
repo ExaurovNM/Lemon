@@ -139,7 +139,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LogonViewModel.cs" />
+    <Compile Include="Models\MainPageViewModel.cs" />
+    <Compile Include="Models\OrderCommentViewModel.cs" />
     <Compile Include="Models\OrderCreateViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="NinjectMainModule\NinjectMainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

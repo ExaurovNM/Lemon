@@ -48,10 +48,12 @@
     <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\BaseEntity.cs" />
     <Compile Include="DomainModels\Order.cs" />
+    <Compile Include="DomainModels\OrderComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

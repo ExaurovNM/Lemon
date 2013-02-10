@@ -1,10 +1,37 @@
 ﻿@using Lemon.Common
-@model Lemon.WebApp.Controllers.OrderViewModel
+@using Lemon.WebApp.Models
+@model Lemon.WebApp.Models.OrderViewModel
 
 @{
     ViewBag.Title = Model.Title.AutoEllipses(16);
 }
 
-<h2> @Model.Title</h2>
+<h2>@Model.Title</h2>
 <p>Описание заказа</p>
+
 @Model.Content
+
+@if(Model.Comments == null || Model.Comments.Count == 0)
+{
+    <p>Нет ни одного комментария на это задание.</p>
+    <p>Будь первым!</p>
+}
+else{
+    <p>Комментарии</p>
+    foreach (var comment in Model.Comments)
+    {
+        <p>@comment.Comment</p>    
+    }
+}
+
+
+
+
+
+@using(Html.BeginForm("CreateComment","Order"))
+{
+    <input type="hidden" name="OrderId" value="@Model.Id"/>
+    <textarea name="Comment" ></textarea>
+    <br />
+    <input type="submit" value="Согласится на задание" />
+}

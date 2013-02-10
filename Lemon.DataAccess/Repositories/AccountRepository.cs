@@ -29,7 +29,7 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                account.CretedTime = DateTime.UtcNow;
+                account.CreatedTime = DateTime.UtcNow;
                 context.Accounts.Add(account);
                 context.SaveChanges();
             }

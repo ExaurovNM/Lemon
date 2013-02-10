@@ -6,6 +6,6 @@ namespace Lemon.DataAccess.DomainModels
     {
         public int Id { get; set; }
 
-        public DateTime CretedTime { get; set; }
+        public DateTime CreatedTime { get; set; }
     }
 }
