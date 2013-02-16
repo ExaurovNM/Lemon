@@ -2,7 +2,6 @@
 
 namespace Lemon.WebApp.Controllers
 {
-    using Lemon.DataAccess.DomainModels;
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
 
@@ -68,18 +67,6 @@ namespace Lemon.WebApp.Controllers
             }
 
             return RedirectToAction("Details", "Order", new { @id = model.OrderId });
-        }
-    }
-
-    public class CreateCommentModel
-    {
-        public int OrderId { get; set; }
-
-        public string Comment { get; set; }
-
-        public OrderComment ConvertToDomain()
-        {
-            return new OrderComment { OrderId = OrderId, Comment = Comment };
         }
     }
 }

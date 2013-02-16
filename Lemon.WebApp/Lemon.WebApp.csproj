@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateCommentModel.cs" />
     <Compile Include="Models\LogonViewModel.cs" />
     <Compile Include="Models\MainPageViewModel.cs" />
     <Compile Include="Models\OrderCommentViewModel.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IOrderService.cs" />
+    <Compile Include="Services\OrderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\background.png" />
@@ -242,6 +244,7 @@
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Order\Create.cshtml" />
     <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Order\_OrderCommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

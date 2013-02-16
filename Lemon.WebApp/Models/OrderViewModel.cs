@@ -9,28 +9,6 @@ namespace Lemon.WebApp.Models
 
     public class OrderViewModel
     {
-        public IList<OrderCommentViewModel> Comments { get; set; }
-
-        public int OwnerId { get; set; }
-
-        public string OwnerDisplayName { get; set; }
-
-        public string Title { get; set; }
-
-        public string Content { get; set; }
-
-        public DateTime CreatedTime { get; set; }
-
-        public string CreatedTimeOut
-        {
-            get
-            {
-                return DateTimeHelper.GetOutTime(this.CreatedTime);
-            }
-        }
-
-        public int Id { get; set; }
-
         public OrderViewModel()
         {
         }
@@ -47,10 +25,35 @@ namespace Lemon.WebApp.Models
             this.OwnerDisplayName = order.Account.Email;
             this.CreatedTime = order.CreatedTime;
             this.Id = order.Id;
-
+            this.ProbableCost = order.ProbableCost;
             this.Comments = order.OrderComments == null
                                 ? null
                                 : order.OrderComments.Select(comment => new OrderCommentViewModel(comment)).ToList();
         }
+
+        public IList<OrderCommentViewModel> Comments { get; set; }
+
+        public int OwnerId { get; set; }
+
+        public string OwnerDisplayName { get; set; }
+
+        public string Title { get; set; }
+
+        public string Content { get; set; }
+
+        public decimal ProbableCost { get; set; }
+
+        public DateTime CreatedTime { get; set; }
+
+        public string CreatedTimeOut
+        {
+            get
+            {
+                return DateTimeHelper.GetOutTime(this.CreatedTime);
+            }
+        }
+
+        public int Id { get; set; }
+
     }
 }

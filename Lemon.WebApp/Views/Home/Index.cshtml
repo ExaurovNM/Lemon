@@ -10,6 +10,7 @@
     <div class="order-preview-holder">
         @Html.ActionLink(order.Title, "Details", "Order", new { id = order.Id }, new {@class = "autoellipses order-title"})
         <span class="order-time">@order.CreatedTimeOut</span>
+        <span>@order.ProbableCost</span>
         <div class="order-content ">@order.Content.AutoEllipses(100)</div>
     </div>
 }

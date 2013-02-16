@@ -10,6 +10,8 @@
 
         public string Comment { get; set; }
 
+        public decimal ProposedCost { get; set; }
+
         public int OrderId { get; set; }
 
         public Order Order { get; set; }

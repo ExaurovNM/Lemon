@@ -1,0 +1,18 @@
+﻿@model Lemon.WebApp.Models.CreateCommentModel
+
+@using(Html.BeginForm("CreateComment","Order"))
+{
+    @Html.HiddenFor(model => model.OrderId)
+    <div class="form-item">
+        @Html.LabelFor(model => model.Comment)
+        @Html.TextAreaFor(model => model.Comment)
+        @Html.ValidationMessageFor(model => model.Comment)   
+    </div>
+    <div class="form-item">
+        @Html.LabelFor(model => model.ProposedCost)
+        @Html.TextBoxFor(model => model.ProposedCost)
+        @Html.ValidationMessageFor(model => model.ProposedCost)   
+    </div>
+    <br />
+    <input type="submit" value="Согласится на задание" />
+}

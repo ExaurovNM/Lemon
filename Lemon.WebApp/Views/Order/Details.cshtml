@@ -20,18 +20,12 @@ else{
     <p>Комментарии</p>
     foreach (var comment in Model.Comments)
     {
-        <p>@comment.Comment</p>    
+        <p>@comment.Comment</p>  
     }
+   
 }
 
+@Html.Partial("_OrderCommentPartial", new CreateCommentModel{OrderId = Model.Id})
 
 
 
-
-@using(Html.BeginForm("CreateComment","Order"))
-{
-    <input type="hidden" name="OrderId" value="@Model.Id"/>
-    <textarea name="Comment" ></textarea>
-    <br />
-    <input type="submit" value="Согласится на задание" />
-}

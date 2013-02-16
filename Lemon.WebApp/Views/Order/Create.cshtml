@@ -25,6 +25,11 @@
         @Html.ValidationMessageFor(model => model.Content)
     </div>
    
+     <div class="form-item">
+        @Html.LabelFor(model => model.ProbableCost)
+        @Html.TextBoxFor(model => model.ProbableCost)
+        @Html.ValidationMessageFor(model => model.ProbableCost)
+    </div>
     <br/>
     
      <input type="submit" value="Создать"/>

@@ -11,7 +11,5 @@
         List<Order> Items();
 
         Order GetById(int id);
-
-        void AddCommentToOrder(OrderComment orderComment);
     }
 }

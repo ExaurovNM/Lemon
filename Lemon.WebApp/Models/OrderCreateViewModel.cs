@@ -10,9 +10,17 @@ namespace Lemon.WebApp.Models
 
         public string Content { get; set; }
 
+        public decimal ProbableCost { get; set; }
+
         public Order GetDomain()
         {
-            return new Order { AccountId = UserId, Content = Content, Title = Title };
+            return new Order
+                {
+                    AccountId = UserId,
+                    Content = Content,
+                    Title = Title,
+                    ProbableCost = ProbableCost
+                };
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders.Include("Account").Include("OrderComments").ToList();
+                return context.Orders.Include("Account").Include("OrderComments").OrderByDescending(order => order.CreatedTime).ToList();
             }
         }
 
@@ -33,16 +33,6 @@ namespace Lemon.DataAccess.Repositories
             {
                 return context.Orders.Include("Account").Include("OrderComments").FirstOrDefault(order => order.Id == id);
             }
-        }
-
-        public void AddCommentToOrder(OrderComment orderComment)
-        {
-            using (var context = new DataBaseContext())
-            {
-                orderComment.CreatedTime = DateTime.UtcNow;
-                context.OrderComments.Add(orderComment);
-                context.SaveChanges();
-            }   
         }
     }
 }

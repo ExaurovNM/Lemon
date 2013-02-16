@@ -12,6 +12,8 @@ namespace Lemon.DataAccess.DomainModels
 
         public string Content { get; set; }
 
+        public decimal ProbableCost { get; set; }
+
         public virtual List<OrderComment> OrderComments { get; set; }
     }
 }
