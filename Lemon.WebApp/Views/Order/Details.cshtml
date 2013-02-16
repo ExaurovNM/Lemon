@@ -20,7 +20,10 @@ else{
     <p>Комментарии</p>
     foreach (var comment in Model.Comments)
     {
-        <p>@comment.Comment</p>  
+        <div class="comment">
+            <div>@comment.Comment</div>
+            <span class="comment-time">@comment.CreationTimeOut</span><span class="comment-price">@comment.Cost</span>
+        </div>
     }
    
 }
