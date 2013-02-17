@@ -4,7 +4,7 @@
         {
             <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
             <li>@Html.ActionLink("Создать задание", "Create", "Order")</li>
-            <li>@Html.ActionLink(User.Identity.Name, "UserProfile", "Account", new {@id = 1}, null)</li>
+            <li>@Html.ActionLink(User.Email, "UserProfile", "Account", new {@id = User.Id}, null)</li>
         
         }
 

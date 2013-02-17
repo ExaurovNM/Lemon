@@ -3,11 +3,13 @@ namespace Lemon.WebApp.Services
     using System;
     using System.Linq;
     using System.Web;
+    using System.Web.Script.Serialization;
     using System.Web.Security;
 
     using Lemon.Common;
     using Lemon.DataAccess.DomainModels;
     using Lemon.DataAccess.Repositories;
+    using Lemon.WebApp.WebHelpers;
 
     public class AuthService : IAuthService
     {
@@ -41,7 +43,36 @@ namespace Lemon.WebApp.Services
 
         public void Logon(string email, bool remember = false)
         {
-            FormsAuthentication.SetAuthCookie(email, remember);
+            var account = accountRepository.GetByEmail(email);
+            if (account != null)
+            {
+                Logon(account, remember);
+            }
+        }
+
+        public void Logon(Account account, bool remember = false)
+        {
+            var serializeModel = new CustomPrincipalSerializeModel
+                {
+                    Email = account.Email, 
+                    Id = account.Id
+                };
+
+            var serializer = new JavaScriptSerializer();
+
+            var userData = serializer.Serialize(serializeModel);
+
+            var authTicket = new FormsAuthenticationTicket(
+                     1,
+                     account.Email,
+                     DateTime.Now,
+                     DateTime.Now.AddMinutes(15),
+                     false,
+                     userData);
+            
+            var encTicket = FormsAuthentication.Encrypt(authTicket);
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+            HttpContext.Current.Response.Cookies.Add(cookie);
         }
 
         public bool Validate(string email, string password)
