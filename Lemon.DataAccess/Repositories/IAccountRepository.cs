@@ -12,5 +12,7 @@
         Account GetByEmail(string email);
 
         void Create(Account account);
+
+        Account GetById(int id);
     }
 }

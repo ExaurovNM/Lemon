@@ -4,6 +4,7 @@ namespace Lemon.WebApp.Controllers
 {
     using System;
 
+    using Lemon.DataAccess.DomainModels;
     using Lemon.DataAccess.Repositories; 
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
@@ -11,10 +12,12 @@ namespace Lemon.WebApp.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthService authService;
+        private readonly IAccountService accountService;
 
-        public AccountController(IAuthService authService)
+        public AccountController(IAuthService authService, IAccountService accountService)
         {
             this.authService = authService;
+            this.accountService = accountService;
         }
 
         public ActionResult Register()
@@ -44,7 +47,7 @@ namespace Lemon.WebApp.Controllers
             return View();
         }
 
-        public ActionResult Logon( )
+        public ActionResult Logon()
         {
             return View();
         }
@@ -70,5 +73,36 @@ namespace Lemon.WebApp.Controllers
             authService.Logout();
             return RedirectToAction("Index", "Home");
         }
+
+
+        public ActionResult UserProfile(int id)
+        {
+            var user = accountService.GetById(id);
+            var currentUser = authService.GetCurrentUser();
+            ProfileViewModel model;
+            if (currentUser != null && user != null)
+            {
+                model = currentUser.Id == user.Id ? new ProfileViewModel(user, true) : new ProfileViewModel(user, false);
+            }
+            else
+            {
+                model = new ProfileViewModel(user, false);
+            }
+            
+            return this.View(model);
+        }
+    }
+
+    public class ProfileViewModel
+    {
+        public ProfileViewModel(Account user, bool isEditable)
+        {
+            IsExist = user != null;
+            IsEditable = isEditable;
+        }
+
+        public bool IsEditable { get; set; }
+
+        public bool IsExist { get; set; }
     }
 }

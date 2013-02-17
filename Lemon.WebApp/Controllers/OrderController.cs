@@ -4,6 +4,7 @@ namespace Lemon.WebApp.Controllers
 {
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
+    using Lemon.WebApp.WebHelpers;
 
     [Authorize]
     public class OrderController : Controller
@@ -46,6 +47,7 @@ namespace Lemon.WebApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [ImportModelStateFromTempData]
         public ActionResult Details(int id)
         {
             var order = orderService.GetById(id);
@@ -56,6 +58,7 @@ namespace Lemon.WebApp.Controllers
 
 
         [HttpPost]
+        [ExportModelStateToTempData]
         public ActionResult CreateComment(CreateCommentModel model)
         {
             if (ModelState.IsValid)

@@ -34,5 +34,13 @@ namespace Lemon.DataAccess.Repositories
                 context.SaveChanges();
             }
         }
+
+        public Account GetById(int id)
+        {
+            using (var context = new DataBaseContext())
+            {
+                return context.Accounts.FirstOrDefault(account => account.Id == id);
+            }
+        }
     }
 }

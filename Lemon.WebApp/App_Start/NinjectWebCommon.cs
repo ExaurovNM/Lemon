@@ -64,6 +64,7 @@ namespace Lemon.WebApp.App_Start
             kernel.Bind<IOrderRepository>().To<OrderRepository>();
             kernel.Bind<ICriptoProvider>().To<CriptoProvider>();
             kernel.Bind<IOrderCommentRepository>().To<OrderCommentRepository>();
+            kernel.Bind<IAccountService>().To<AccountService>();
         }        
     }
 }

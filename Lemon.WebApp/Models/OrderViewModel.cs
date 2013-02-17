@@ -54,6 +54,5 @@ namespace Lemon.WebApp.Models
         }
 
         public int Id { get; set; }
-
     }
 }
