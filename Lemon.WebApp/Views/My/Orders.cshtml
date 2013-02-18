@@ -5,3 +5,17 @@
 }
 
 <h2>Мои заказы</h2>
+
+@{
+    if (Model.Orders == null || Model.Orders.Count == 0)
+    {
+        <span>У вас ещё нет заказов</span>
+    }
+    else
+    {
+        foreach (var order in Model.Orders)
+        {
+            @Html.ActionLink(order.Title, "Details", "Order", new { id = order.Id }, null);
+        }
+    }
+}
