@@ -1,6 +1,5 @@
 ﻿namespace Lemon.DataAccess.Repositories
 {
-    using System;
     using System.Collections.Generic;
 
     using Lemon.DataAccess.DomainModels;

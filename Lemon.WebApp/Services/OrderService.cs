@@ -35,5 +35,10 @@ namespace Lemon.WebApp.Services
         {
             this.orderCommentRepository.AddCommentToOrder(orderComment);
         }
+
+        public List<Order> GetByUserId(int id)
+        {
+            return orderRepository.GetByUserId(id);
+        }
     }
 }

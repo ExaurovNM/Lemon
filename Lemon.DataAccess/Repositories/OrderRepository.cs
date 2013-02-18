@@ -34,5 +34,13 @@ namespace Lemon.DataAccess.Repositories
                 return context.Orders.Include("Account").Include("OrderComments").FirstOrDefault(order => order.Id == id);
             }
         }
+
+        public List<Order> GetByUserId(int id)
+        {
+            using (var context = new DataBaseContext())
+            {
+                return context.Orders.Include("Account").Include("OrderComments").Where(order => order.AccountId == id).ToList();
+            }
+        }
     }
 }

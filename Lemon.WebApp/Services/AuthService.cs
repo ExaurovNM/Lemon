@@ -67,7 +67,7 @@ namespace Lemon.WebApp.Services
                      account.Email,
                      DateTime.Now,
                      DateTime.Now.AddMinutes(15),
-                     false,
+                     remember,
                      userData);
             
             var encTicket = FormsAuthentication.Encrypt(authTicket);
@@ -94,13 +94,12 @@ namespace Lemon.WebApp.Services
         public Account GetCurrentUser()
         {
             var context = HttpContext.Current;
-            var identity = context.User.Identity;
-            if (!identity.IsAuthenticated)
+            var identity = (ICustomPrincipal)context.User;
+            if (!identity.Identity.IsAuthenticated)
             {
                 return null;
             }
-            var email = identity.Name;
-            return accountRepository.GetByEmail(email);
+            return accountRepository.GetById(identity.Id);
         }
     }
 }

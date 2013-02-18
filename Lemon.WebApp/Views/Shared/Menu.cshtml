@@ -5,6 +5,7 @@
             <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
             <li>@Html.ActionLink("Создать задание", "Create", "Order")</li>
             <li>@Html.ActionLink(User.Email, "UserProfile", "Account", new {@id = User.Id}, null)</li>
+            <li>@Html.ActionLink("Мои заказы", "Orders", "My")</li>
         
         }
 

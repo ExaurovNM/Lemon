@@ -11,5 +11,7 @@
         List<Order> Items();
 
         Order GetById(int id);
+
+        List<Order> GetByUserId(int id);
     }
 }
