@@ -15,7 +15,8 @@
     {
         foreach (var order in Model.Orders)
         {
-            @Html.ActionLink(order.Title, "Details", "Order", new { id = order.Id }, null);
+            @Html.ActionLink(order.Title, "Details", "Order", new { id = order.Id }, null)
+            <br/>
         }
     }
 }

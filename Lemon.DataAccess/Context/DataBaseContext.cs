@@ -16,6 +16,8 @@
 
         public DbSet<OrderComment> OrderComments { get; set; }
 
+        public DbSet<Message> Messages { get; set; } 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>().HasMany(account => account.Orders).WithRequired(order => order.Account).WillCascadeOnDelete();

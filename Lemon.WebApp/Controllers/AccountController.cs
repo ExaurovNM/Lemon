@@ -4,7 +4,6 @@ namespace Lemon.WebApp.Controllers
 {
     using System;
 
-    using Lemon.DataAccess.DomainModels;
     using Lemon.DataAccess.Repositories; 
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
@@ -57,7 +56,7 @@ namespace Lemon.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(authService.Validate(model.Email, model.Password))
+                if (authService.Validate(model.Email, model.Password))
                 {
                     authService.Logon(model.Email, model.Remember);
                     return RedirectToAction("Index", "Home");
@@ -91,18 +90,5 @@ namespace Lemon.WebApp.Controllers
             
             return this.View(model);
         }
-    }
-
-    public class ProfileViewModel
-    {
-        public ProfileViewModel(Account user, bool isEditable)
-        {
-            IsExist = user != null;
-            IsEditable = isEditable;
-        }
-
-        public bool IsEditable { get; set; }
-
-        public bool IsExist { get; set; }
     }
 }

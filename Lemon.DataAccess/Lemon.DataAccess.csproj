@@ -47,6 +47,7 @@
     <Compile Include="Context\DataBaseContext.cs" />
     <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\BaseEntity.cs" />
+    <Compile Include="DomainModels\Message.cs" />
     <Compile Include="DomainModels\Order.cs" />
     <Compile Include="DomainModels\OrderComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
