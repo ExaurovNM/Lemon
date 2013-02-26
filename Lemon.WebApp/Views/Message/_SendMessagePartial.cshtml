@@ -1,0 +1,13 @@
+﻿@model Lemon.WebApp.Models.CreateMessageModel
+
+@using(Html.BeginForm("SendMessage","Message"))
+{
+    @Html.HiddenFor(model => model.recieverId)
+    <div class="form-item">
+        @Html.LabelFor(model => model.Text)
+        @Html.TextAreaFor(model => model.Text)
+        @Html.ValidationMessageFor(model => model.Text)   
+    </div>
+    <br />
+    <input type="submit" value="Отправить сообщение" />
+}

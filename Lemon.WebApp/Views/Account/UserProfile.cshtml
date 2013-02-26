@@ -6,7 +6,10 @@
 
 @if(Model.IsExist)
 {
-    
+    if (!Model.IsEditable)
+     {
+         @Html.ActionLink("Отправить ЛС", "SendMessage", "Message", new {@id = Model.userId}, null)
+     }
 }
 else{
     <span>Пользователь не найден</span>
