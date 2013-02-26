@@ -15,5 +15,7 @@
         void AddCommentToOrder(OrderComment orderComment);
 
         List<Order> GetByUserId(int id);
+
+        bool IsCanComment(int id, int i);
     }
 }

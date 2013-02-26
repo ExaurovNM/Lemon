@@ -28,7 +28,10 @@ else{
    
 }
 
-@Html.Partial("_OrderCommentPartial", new CreateCommentModel { OrderId = Model.Id })
+@if(Model.IsCanComment)
+{
+    @Html.Partial("_OrderCommentPartial", new CreateCommentModel { OrderId = Model.Id })
+}
 
 
 

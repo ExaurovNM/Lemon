@@ -1,6 +1,7 @@
 namespace Lemon.WebApp.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using Lemon.DataAccess.DomainModels;
     using Lemon.DataAccess.Repositories;
@@ -39,6 +40,27 @@ namespace Lemon.WebApp.Services
         public List<Order> GetByUserId(int id)
         {
             return orderRepository.GetByUserId(id);
+        }
+
+        public bool IsCanComment(int userId, int orderId)
+        {
+            var order = orderRepository.GetById(orderId);
+            if (order == null)
+            {
+                return false;
+            }
+
+            if (order.AccountId == userId)
+            {
+                return false;
+            }
+
+            if (order.OrderComments.Any(comment => comment.AuthorId == userId))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

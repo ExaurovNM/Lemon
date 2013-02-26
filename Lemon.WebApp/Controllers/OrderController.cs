@@ -51,7 +51,9 @@ namespace Lemon.WebApp.Controllers
         public ActionResult Details(int id)
         {
             var order = orderService.GetById(id);
-            var model = new OrderViewModel(order);
+            var user = authService.GetCurrentUser();
+            var canComment = orderService.IsCanComment(user.Id, id);
+            var model = new OrderViewModel(order, canComment);
 
             return View(model);
         }

@@ -13,7 +13,11 @@ namespace Lemon.WebApp.Models
         {
         }
 
-        public OrderViewModel(Order order)
+        public OrderViewModel(Order order) : this(order, false)
+        {
+        }
+
+        public OrderViewModel(Order order, bool isCanComment)
         {
             if (order == null)
             {
@@ -29,6 +33,7 @@ namespace Lemon.WebApp.Models
             this.Comments = order.OrderComments == null
                                 ? null
                                 : order.OrderComments.Select(comment => new OrderCommentViewModel(comment)).ToList();
+            IsCanComment = isCanComment;
         }
 
         public IList<OrderCommentViewModel> Comments { get; set; }
@@ -54,5 +59,7 @@ namespace Lemon.WebApp.Models
         }
 
         public int Id { get; set; }
+
+        public bool IsCanComment { get; set; }
     }
 }
