@@ -141,6 +141,7 @@
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\MyOrdersViewModel.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
+    <Compile Include="Models\LastMessagesListViewModel.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="WebHelpers\BaseViewPage.cs" />
@@ -266,6 +267,7 @@
     <Content Include="Views\My\Orders.cshtml" />
     <Content Include="Views\Message\SendMessage.cshtml" />
     <Content Include="Views\Message\_SendMessagePartial.cshtml" />
+    <Content Include="Views\Message\All.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

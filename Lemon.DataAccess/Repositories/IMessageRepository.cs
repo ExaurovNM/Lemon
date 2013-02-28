@@ -11,5 +11,7 @@ namespace Lemon.DataAccess.Repositories
     {
         void AddMessage(Message message);
         List<Message> GetById(int senderId, int recieverId);
+        List<Message> GetBySenderId(int userId);
+        List<Message> GetByRecieverId(int userId);
     }
 }

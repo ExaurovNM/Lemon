@@ -30,6 +30,23 @@ using System.Collections.Generic;
                 
             }
         }
+        public List<Message> GetBySenderId(int senderId)
+        {
+            using (var context = new DataBaseContext())
+            {
+                return 
+                    context.Messages.Where(message=>(message.SenderId == senderId)).ToList();
+            }
+        }
+
+        public List<Message> GetByRecieverId(int recieverId)
+        {
+            using (var context = new DataBaseContext())
+            {
+                return
+                    context.Messages.Where(message => (message.ReciverId == recieverId)).ToList();
+            }
+        }
  
     }
 }
