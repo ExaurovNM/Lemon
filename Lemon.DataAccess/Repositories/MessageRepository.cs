@@ -26,7 +26,10 @@ using System.Collections.Generic;
             {
                 
                 return
-                    context.Messages.Where(message => (message.SenderId == senderId && message.ReciverId == recieverId)).ToList();
+                    context.Messages
+                    .Include(message => message.Reciver)
+                    .Include(message => message.Sender)
+                    .Where(message => (message.SenderId == senderId && message.ReciverId == recieverId)).ToList();
                 
             }
         }
@@ -35,7 +38,11 @@ using System.Collections.Generic;
             using (var context = new DataBaseContext())
             {
                 return 
-                    context.Messages.Where(message=>(message.SenderId == senderId)).ToList();
+                    context.Messages
+                    .Include(message => message.Reciver)
+                    .Include(message => message.Sender)
+                    .Where(message => (message.SenderId == senderId))
+                    .ToList();
             }
         }
 
@@ -44,7 +51,10 @@ using System.Collections.Generic;
             using (var context = new DataBaseContext())
             {
                 return
-                    context.Messages.Where(message => (message.ReciverId == recieverId)).ToList();
+                    context.Messages
+                    .Include(message => message.Reciver)
+                    .Include(message => message.Sender)
+                    .Where(message => (message.ReciverId == recieverId)).ToList();
             }
         }
  

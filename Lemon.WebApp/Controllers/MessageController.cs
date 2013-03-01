@@ -28,7 +28,7 @@ namespace Lemon.WebApp.Controllers
             List<Message> listOfMessage = messageService.MessagesBetweenUsers(id, authService.GetCurrentUser().Id);
             string senderEmail = authService.GetCurrentUser().Email;
             string recieverEmail = accountService.GetById(id).Email;
-            var messages = new MessageViewModel(listOfMessage, id, senderEmail, recieverEmail);
+            var messages = new MessagesViewModel(listOfMessage, id, senderEmail, recieverEmail);
             return View(messages);
         }
 
@@ -46,11 +46,18 @@ namespace Lemon.WebApp.Controllers
         public ActionResult All()
         {
             int currentUserId = authService.GetCurrentUser().Id;
-            List<Message> Messages = messageService.LastMessages(currentUserId);
-            List<string> partnerEmail=new List<string>();
-            foreach (Message message in Messages)
-                partnerEmail.Add(accountService.GetById(message.SenderId==currentUserId?message.ReciverId:message.SenderId).Email);
-            return View(new LastMessagesListViewModel(currentUserId,Messages,partnerEmail));
+            var messages = messageService.LastMessages(currentUserId);
+            var model = new LastMessagesListViewModel
+                {
+                    CurrentUserId = currentUserId,
+                    LastMessages = messages.Select(message => new MessageViewModel(message)).ToList(),
+                };
+
+            foreach (var message in model.LastMessages)
+            {
+                message.UpdateCorrespondence(currentUserId);
+            }
+            return View(model);
         }
     }
 }

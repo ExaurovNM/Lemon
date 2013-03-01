@@ -138,6 +138,7 @@
     <Compile Include="Controllers\MyController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Models\CreateMessageModel.cs" />
+    <Compile Include="Models\MessagesViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\MyOrdersViewModel.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />

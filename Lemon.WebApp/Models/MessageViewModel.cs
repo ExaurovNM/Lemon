@@ -1,23 +1,47 @@
-﻿using Lemon.DataAccess.DomainModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 namespace Lemon.WebApp.Models
 {
+    using System;
+
+    using Lemon.DataAccess.DomainModels;
+
     public class MessageViewModel
     {
-        public int recieverId { get; set; }
-        public string senderEmail { get; set; }
-        public string recieverEmail { get; set; }
-        public List<Message> Messages { get; set; }
-        public MessageViewModel(List<Message> messages,int id,string senderEmail,string recieverEmail)
+        public MessageViewModel(Message message)
         {
-            this.Messages = messages;
-            this.recieverId = id;
-            this.senderEmail = senderEmail;
-            this.recieverEmail = recieverEmail;
+            Text = message.Text;
+            Created = message.CreatedTime;
+            ReciverId = message.ReciverId;
+            SenderId = message.SenderId;
+            SenderEmail = message.Sender.Email;
+            ReciverEmail = message.Reciver.Email;
+        }
+
+        public string Text { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public int SenderId { get; set; }
+
+        public int ReciverId { get; set; }
+
+        public string SenderEmail { get; set; }
+
+        public string ReciverEmail { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CorrespondenceEmail { get; set; }
+
+        public int CorrespondenceId { get; set; }
+
+        public bool IsLastMessageFromCurrentUser { get; set; }
+
+        public void UpdateCorrespondence(int currentUserId)
+        {
+            CorrespondenceEmail = currentUserId == SenderId ? ReciverEmail : SenderEmail;
+            CorrespondenceId = currentUserId == SenderId ? ReciverId : SenderId;
+            IsLastMessageFromCurrentUser = currentUserId == SenderId;
         }
     }
 }

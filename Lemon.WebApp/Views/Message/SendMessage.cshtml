@@ -1,6 +1,6 @@
 ﻿@using Lemon.Common
 @using Lemon.WebApp.Models
-@model Lemon.WebApp.Models.MessageViewModel
+@model Lemon.WebApp.Models.MessagesViewModel
 
 @{
     ViewBag.Title = "SendMessage";
@@ -17,7 +17,7 @@
        {
            @Html.ActionLink(Model.recieverEmail, "UserProfile", "Account", new {@id = mess.SenderId}, null)
        } 
-        @mess.CreatedTime
+        @mess.Created
         <br/>
         @mess.Text
     </p>
