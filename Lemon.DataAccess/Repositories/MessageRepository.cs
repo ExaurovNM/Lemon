@@ -20,7 +20,7 @@ using System.Collections.Generic;
                 context.SaveChanges();
             }
         }
-        public List<Message> GetById(int senderId, int recieverId)
+        public List<Message> GetBySenderIdAndRecieverId(int senderId, int recieverId)
         {
             using (var context=new DataBaseContext())
             {

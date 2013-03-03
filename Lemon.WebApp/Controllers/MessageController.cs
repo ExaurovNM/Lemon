@@ -21,15 +21,26 @@ namespace Lemon.WebApp.Controllers
             this.messageService = messageService;
             this.accountService = accountService;
         }
+        public ActionResult CorrespondenceWithUser(int id)
+        {
+            if (id != this.authService.GetCurrentUser().Id)
+            {
+                List<Message> listOfMessage = this.messageService.MessagesBetweenUsers(
+                    id, this.authService.GetCurrentUser().Id);
+                string senderEmail = this.authService.GetCurrentUser().Email;
+                string recieverEmail = this.accountService.GetById(id).Email;
+                var messages = new MessagesViewModel(listOfMessage, id, senderEmail, recieverEmail);
+                return this.View(messages);
+            }
+            return this.RedirectToAction("UserProfile", "Account", new { @id = id });
+        }
         public ActionResult SendMessage(int id)
         {
-            if (id == authService.GetCurrentUser().Id)
-                return RedirectToAction("UserProfile", "Account", new { @id = id });
-            List<Message> listOfMessage = messageService.MessagesBetweenUsers(id, authService.GetCurrentUser().Id);
-            string senderEmail = authService.GetCurrentUser().Email;
-            string recieverEmail = accountService.GetById(id).Email;
-            var messages = new MessagesViewModel(listOfMessage, id, senderEmail, recieverEmail);
-            return View(messages);
+            if (id != this.authService.GetCurrentUser().Id)
+            {
+                return this.View(new CreateMessageModel{recieverId = id});
+            }
+            return this.RedirectToAction("UserProfile", "Account", new { @id = id });
         }
 
         [HttpPost]
@@ -37,10 +48,9 @@ namespace Lemon.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 messageService.AddMessage(new Message(authService.GetCurrentUser().Id, model.recieverId, model.Text));
             }
-            return RedirectToAction("SendMessage", "Message", new { @id = model.recieverId });
+            return RedirectToAction("CorrespondenceWithUser", "Message", new { @id = model.recieverId });
         }
 
         public ActionResult All()

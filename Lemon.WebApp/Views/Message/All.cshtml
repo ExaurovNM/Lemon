@@ -16,7 +16,7 @@
         {
           @Html.ActionLink("Вы", "UserProfile", "Account", new {@id = Model.CurrentUserId}, null) @Html.Label(" писали:")
         }
-        @Html.ActionLink(message.Text.AutoEllipses(20), "SendMessage", "Message", new { @id = message.CorrespondenceId }, null)
+        @Html.ActionLink(message.Text.AutoEllipses(20), "CorrespondenceWithUser", "Message", new { @id = message.CorrespondenceId }, null)
     </p>
     <br/>
 }

@@ -10,7 +10,7 @@ namespace Lemon.DataAccess.Repositories
     public interface IMessageRepository
     {
         void AddMessage(Message message);
-        List<Message> GetById(int senderId, int recieverId);
+        List<Message> GetBySenderIdAndRecieverId(int senderId, int recieverId);
         List<Message> GetBySenderId(int userId);
         List<Message> GetByRecieverId(int userId);
     }

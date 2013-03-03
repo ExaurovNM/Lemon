@@ -1,0 +1,26 @@
+﻿@using Lemon.WebApp.Models
+@model Lemon.WebApp.Models.MessagesViewModel
+
+@{
+    ViewBag.Title = "CorrespondenceWithUser";
+}
+
+<h2>Вся переписка с @Html.ActionLink(Model.CorrespondenceEmail,"UserProfile","Account",new {@id=Model.CorrespondenceId},null)</h2>
+
+@foreach (var mess in Model.Messages)
+{
+    <p>@if (Model.CorrespondenceId == mess.ReciverId)
+       {
+           @Html.ActionLink(Model.currentUserEmail, "UserProfile", "Account", new {@id = mess.SenderId}, null)
+       }
+        else
+       {
+           @Html.ActionLink(Model.CorrespondenceEmail, "UserProfile", "Account", new {@id = mess.SenderId}, null)
+       } 
+        @mess.Created
+        <br/>
+        @mess.Text
+    </p>
+}
+<br/>
+@Html.Partial("_SendMessagePartial", new CreateMessageModel { recieverId = Model.CorrespondenceId })
