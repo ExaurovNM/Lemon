@@ -50,6 +50,7 @@
     <Compile Include="DomainModels\Message.cs" />
     <Compile Include="DomainModels\Order.cs" />
     <Compile Include="DomainModels\OrderComment.cs" />
+    <Compile Include="DomainModels\OrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />

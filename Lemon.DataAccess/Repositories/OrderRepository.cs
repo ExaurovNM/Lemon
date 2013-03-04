@@ -15,6 +15,7 @@ namespace Lemon.DataAccess.Repositories
             {
                 
                 order.CreatedTime = DateTime.UtcNow;
+                order.Status = OrderStatus.Openned;
                 context.Orders.Add(order);
                 context.SaveChanges();
             }
@@ -41,6 +42,15 @@ namespace Lemon.DataAccess.Repositories
             using (var context = new DataBaseContext())
             {
                 return context.Orders.Include("Account").Include("OrderComments").Where(order => order.AccountId == id).ToList();
+            }
+        }
+
+        public void ChangeOrderStatus(int orderId, int newStatus)
+        {
+            using (var context = new DataBaseContext())
+            {
+                context.Orders.FirstOrDefault(order => order.Id == orderId).Status = newStatus;
+                context.SaveChanges();
             }
         }
     }

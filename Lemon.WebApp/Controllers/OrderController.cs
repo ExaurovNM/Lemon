@@ -2,6 +2,7 @@
 
 namespace Lemon.WebApp.Controllers
 {
+    using Lemon.DataAccess.DomainModels;
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
     using Lemon.WebApp.WebHelpers;
@@ -23,7 +24,7 @@ namespace Lemon.WebApp.Controllers
             var model = new OrderCreateViewModel();
             var user = authService.GetCurrentUser();
             model.UserId = user.Id;
-            
+
             return View(model);
         }
 
@@ -34,7 +35,7 @@ namespace Lemon.WebApp.Controllers
             {
                 return View(model);
             }
-            
+
             var user = this.authService.GetCurrentUser();
             if (user.Id != model.UserId)
             {
@@ -52,7 +53,7 @@ namespace Lemon.WebApp.Controllers
         {
             var order = orderService.GetById(id);
             var model = new OrderViewModel(order);
-
+            model.IsOwnOrder = authService.GetCurrentUser().Id == order.AccountId ? true : false;
             return View(model);
         }
 
@@ -69,6 +70,34 @@ namespace Lemon.WebApp.Controllers
                 return RedirectToAction("Details", "Order", new { @id = model.OrderId });
             }
 
+            return RedirectToAction("Details", "Order", new { @id = model.OrderId });
+        }
+
+
+        [HttpPost]
+        public ActionResult AcceptOffer(int id)
+        {
+            if (this.authService.GetCurrentUser().Id == this.orderService.GetById(id).AccountId)
+            {
+                this.orderService.ChangeOrderStatus(id, OrderStatus.InProgress);
+            }
+            return RedirectToAction("Details", "Order", new { @id = id });
+        }
+
+        public ActionResult CloseOrder(int id)
+        {
+            if (orderService.GetById(id).AccountId == authService.GetCurrentUser().Id)
+                return View(new CloseOrderViewModel{OrderId = id});
+            else
+                return RedirectToAction("Details", "Order", new { @id = id });
+        }
+
+        [HttpPost]
+        public ActionResult CloseOrder(CloseOrderViewModel model)
+        {
+            if (!ModelState.IsValid) 
+                return View(model);
+            orderService.CloseOrder(model.OrderId);
             return RedirectToAction("Details", "Order", new { @id = model.OrderId });
         }
     }

@@ -15,5 +15,9 @@
         void AddCommentToOrder(OrderComment orderComment);
 
         List<Order> GetByUserId(int id);
+
+        void ChangeOrderStatus(int orderId, int newStatus);
+
+        void CloseOrder(int orderId);
     }
 }

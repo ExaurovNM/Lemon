@@ -1,5 +1,6 @@
 namespace Lemon.WebApp.Services
 {
+    using System;
     using System.Collections.Generic;
 
     using Lemon.DataAccess.DomainModels;
@@ -40,5 +41,19 @@ namespace Lemon.WebApp.Services
         {
             return orderRepository.GetByUserId(id);
         }
+
+        public void ChangeOrderStatus(int orderId, int newStatus)
+        {
+            if (orderRepository.GetById(orderId) != null)
+            {
+                orderRepository.ChangeOrderStatus(orderId, newStatus);
+            }
+        }
+
+        public void CloseOrder(int orderId)
+        {
+            this.ChangeOrderStatus(orderId,OrderStatus.Closed);
+        }
+
     }
 }

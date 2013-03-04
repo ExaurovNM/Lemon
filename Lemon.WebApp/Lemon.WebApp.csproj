@@ -137,6 +137,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MyController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Models\CloseOrderViewModel.cs" />
     <Compile Include="Models\CreateMessageModel.cs" />
     <Compile Include="Models\MessagesViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -270,6 +271,7 @@
     <Content Include="Views\Message\_SendMessagePartial.cshtml" />
     <Content Include="Views\Message\All.cshtml" />
     <Content Include="Views\Message\CorrespondenceWithUser.cshtml" />
+    <Content Include="Views\Order\CloseOrder.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
