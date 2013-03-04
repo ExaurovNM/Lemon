@@ -53,10 +53,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
+    <Compile Include="Repositories\IMessageRepository.cs" />
     <Compile Include="Repositories\IOrderCommentRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
     <Compile Include="Repositories\OrderCommentRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -11,5 +11,7 @@
         public virtual List<Order> Orders { get; set; }
 
         public string Salt { get; set; }
+
+        public virtual IList<Message> Messages { get; set; }
     }
 }

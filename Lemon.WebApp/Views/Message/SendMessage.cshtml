@@ -1,0 +1,10 @@
+﻿@using Lemon.Common
+@using Lemon.WebApp.Models
+@model Lemon.WebApp.Models.CreateMessageModel
+
+@{
+    ViewBag.Title = "SendMessage";
+}
+
+
+@Html.Partial("_SendMessagePartial", new CreateMessageModel { recieverId = Model.recieverId })

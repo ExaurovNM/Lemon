@@ -1,0 +1,22 @@
+﻿@using Lemon.Common;
+@model Lemon.WebApp.Models.LastMessagesListViewModel
+
+@{
+    ViewBag.Title = "All";
+}
+
+<h2>Вся переписка</h2>
+
+@foreach (var message in Model.LastMessages)
+{
+    <p>
+        @Html.ActionLink(message.CorrespondenceEmail, "UserProfile", "Account", new {@id = message.CorrespondenceId}, null)
+        @DateTimeHelper.GetOutTime(message.Created)
+        @if (message.IsLastMessageFromCurrentUser)
+        {
+          @Html.ActionLink("Вы", "UserProfile", "Account", new {@id = Model.CurrentUserId}, null) @Html.Label(" писали:")
+        }
+        @Html.ActionLink(message.Text.AutoEllipses(20), "CorrespondenceWithUser", "Message", new { @id = message.CorrespondenceId }, null)
+    </p>
+    <br/>
+}

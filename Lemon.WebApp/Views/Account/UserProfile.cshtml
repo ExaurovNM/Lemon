@@ -4,10 +4,20 @@
     ViewBag.Title = "Профиль";
 }
 
-@if(Model.IsExist)
+@if (Model.IsExist)
 {
-    
+    if (!Model.IsEditable)
+    {
+    @Html.ActionLink("Показать переписку", "CorrespondenceWithUser", "Message", new { @id = Model.userId }, null)
+    <br/>
+    @Html.ActionLink("Отправить ЛС", "SendMessage", "Message", new { @id = Model.userId }, null)
+    }
+    else
+    {
+    @Html.ActionLink("Мои сообщения", "All", "Message")
+    }
 }
-else{
+else
+{
     <span>Пользователь не найден</span>
 }

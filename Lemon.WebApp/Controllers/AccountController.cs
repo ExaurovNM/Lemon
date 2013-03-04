@@ -81,11 +81,11 @@ namespace Lemon.WebApp.Controllers
             ProfileViewModel model;
             if (currentUser != null && user != null)
             {
-                model = currentUser.Id == user.Id ? new ProfileViewModel(user, true) : new ProfileViewModel(user, false);
+                model = currentUser.Id == user.Id ? new ProfileViewModel(user, true,id) : new ProfileViewModel(user, false,id);
             }
             else
             {
-                model = new ProfileViewModel(user, false);
+                model = new ProfileViewModel(user, false,id);
             }
             
             return this.View(model);

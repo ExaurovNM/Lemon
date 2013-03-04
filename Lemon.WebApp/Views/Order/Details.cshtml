@@ -10,7 +10,8 @@
 <p>Описание заказа</p>
 
 @Model.Content
-
+<br/>
+@Html.ActionLink("Профиль пользователя", "UserProfile", "Account", new {@id = Model.OwnerId}, null)
 @if(Model.Comments == null || Model.Comments.Count == 0)
 {
     <p>Нет ни одного комментария на это задание.</p>

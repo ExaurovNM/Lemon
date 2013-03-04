@@ -22,6 +22,8 @@
         {
             modelBuilder.Entity<Account>().HasMany(account => account.Orders).WithRequired(order => order.Account).WillCascadeOnDelete();
             modelBuilder.Entity<Order>().HasMany(order => order.OrderComments).WithRequired(comment => comment.Order).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Account>().HasMany(account => account.Messages).WithRequired(message => message.Reciver).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Account>().HasMany(account => account.Messages).WithRequired(message => message.Sender).WillCascadeOnDelete(false);
         }
     }
 }
