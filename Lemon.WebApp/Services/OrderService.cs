@@ -1,5 +1,6 @@
 namespace Lemon.WebApp.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -40,6 +41,31 @@ namespace Lemon.WebApp.Services
         public List<Order> GetByUserId(int id)
         {
             return orderRepository.GetByUserId(id);
+        }
+
+        public void ChangeOrderStatus(int orderId, int newStatus)
+        {
+            if (orderRepository.GetById(orderId) != null)
+            {
+                orderRepository.ChangeOrderStatus(orderId, newStatus);
+            }
+        }
+
+        public List<Order> GetByStatusId(int statusId)
+        {
+            return this.orderRepository.GetByStatusId(statusId);
+        }
+
+        public void AcceptOffer(int orderId, int employeeId)
+        {
+            this.ChangeOrderStatus(orderId, OrderStatus.InProgress);
+            this.ChangeOrderEmployee(orderId, employeeId);
+            
+        }
+
+        public void ChangeOrderEmployee(int orderId, int employeeId)
+        {
+            orderRepository.ChangeOrderEmployee(orderId, employeeId);
         }
 
         public bool IsCanComment(int userId, int orderId)

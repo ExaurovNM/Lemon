@@ -13,5 +13,11 @@
         Order GetById(int id);
 
         List<Order> GetByUserId(int id);
+
+        void ChangeOrderStatus(int orderId, int newStatus);
+
+        List<Order> GetByStatusId(int statusId);
+
+        void ChangeOrderEmployee(int orderId, int? employeeId);
     }
 }

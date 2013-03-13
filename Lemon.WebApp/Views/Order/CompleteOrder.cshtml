@@ -1,0 +1,28 @@
+﻿@using System.Web.Mvc.Html
+@model Lemon.WebApp.Models.CompleteOrderViewModel
+
+@{
+    ViewBag.Title = "CompleteOrder";
+}
+
+<h2>Закрытие заказа</h2>
+@using(Html.BeginForm("CompleteOrder","Order"))
+{
+    @Html.HiddenFor(model => model.OrderId)
+    <div class="form-item">
+        @Html.LabelFor(model => model.Comment)
+        @Html.TextAreaFor(model => model.Comment)
+        @Html.ValidationMessageFor(model => model.Comment)  
+    </div>
+    <div class="form-item">
+         
+        @Html.LabelFor(model => model.Raiting)
+        <br/>
+        @Html.RadioButtonFor(model=>model.Raiting,"true")+
+        <br/>
+        @Html.RadioButtonFor(model=>model.Raiting,"false")-
+        @Html.ValidationMessageFor(model => model.Raiting)  
+    </div>
+    <br />
+    <input type="submit" value="Закрыть заказ" />
+}

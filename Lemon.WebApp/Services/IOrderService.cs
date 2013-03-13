@@ -16,6 +16,14 @@
 
         List<Order> GetByUserId(int id);
 
-        bool IsCanComment(int id, int i);
+        void ChangeOrderStatus(int orderId, int newStatus);
+
+        List<Order> GetByStatusId(int statusId);
+
+        void AcceptOffer(int orderId, int employeeId);
+
+        void ChangeOrderEmployee(int orderId, int employeeId);
+
+        bool IsCanComment(int userId, int orderId);
     }
 }

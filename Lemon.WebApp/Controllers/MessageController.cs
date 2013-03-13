@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Lemon.WebApp.Controllers
 {
+    [Authorize]
     public class MessageController : Controller
     {
         private readonly IAuthService authService;

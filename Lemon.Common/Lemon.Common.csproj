@@ -42,6 +42,7 @@
     <Compile Include="CriptoProvider.cs" />
     <Compile Include="DateTimeHelper.cs" />
     <Compile Include="ICriptoProvider.cs" />
+    <Compile Include="IntExtention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtention.cs" />
   </ItemGroup>

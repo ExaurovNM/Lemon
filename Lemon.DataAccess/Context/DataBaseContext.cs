@@ -16,7 +16,9 @@
 
         public DbSet<OrderComment> OrderComments { get; set; }
 
-        public DbSet<Message> Messages { get; set; } 
+        public DbSet<Message> Messages { get; set; }
+
+        public DbSet<UserRating> UserRatings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
