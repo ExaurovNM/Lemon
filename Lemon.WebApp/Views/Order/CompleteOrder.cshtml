@@ -1,12 +1,12 @@
 ﻿@using System.Web.Mvc.Html
-@model Lemon.WebApp.Models.CloseOrderViewModel
+@model Lemon.WebApp.Models.CompleteOrderViewModel
 
 @{
-    ViewBag.Title = "CloseOrder";
+    ViewBag.Title = "CompleteOrder";
 }
 
 <h2>Закрытие заказа</h2>
-@using(Html.BeginForm("CloseOrder","Order"))
+@using(Html.BeginForm("CompleteOrder","Order"))
 {
     @Html.HiddenFor(model => model.OrderId)
     <div class="form-item">

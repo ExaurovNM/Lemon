@@ -18,6 +18,10 @@
 
         void ChangeOrderStatus(int orderId, int newStatus);
 
-        void CloseOrder(int orderId);
+        List<Order> GetByStatusId(int statusId);
+
+        void AcceptOffer(int orderId, int employeeId);
+
+        void ChangeOrderEmployee(int orderId, int employeeId);
     }
 }

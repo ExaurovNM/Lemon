@@ -17,5 +17,7 @@ namespace Lemon.DataAccess.DomainModels
         public virtual List<OrderComment> OrderComments { get; set; }
 
         public int Status { get; set; }
+
+        public int? EmployeeId { get; set; }
     }
 }

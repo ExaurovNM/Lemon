@@ -50,10 +50,21 @@ namespace Lemon.WebApp.Services
             }
         }
 
-        public void CloseOrder(int orderId)
+        public List<Order> GetByStatusId(int statusId)
         {
-            this.ChangeOrderStatus(orderId,OrderStatus.Closed);
+            return this.orderRepository.GetByStatusId(statusId);
         }
 
+        public void AcceptOffer(int orderId, int employeeId)
+        {
+            this.ChangeOrderStatus(orderId, OrderStatus.InProgress);
+            this.ChangeOrderEmployee(orderId, employeeId);
+            
+        }
+
+        public void ChangeOrderEmployee(int orderId, int employeeId)
+        {
+            orderRepository.ChangeOrderEmployee(orderId, employeeId);
+        }
     }
 }

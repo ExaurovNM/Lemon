@@ -6,6 +6,22 @@
 
 @if (Model.IsExist)
 {
+    @Html.Label("Положительных отзывов: ")@Model.PositiveRaite<br />
+    @Html.Label("Отрицательных отзывов: ")@Model.NegativeRaite<br />
+    if (Model.Comments.Count == 0)
+    {
+        @Html.Label("Отзывов нет:")<br />
+    }
+    else
+    {
+        @Html.Label("Отзывы:")<br />
+        foreach (string c in Model.Comments)
+        {
+            @Html.Label(c)
+            <br/>
+        }
+    }
+
     if (!Model.IsEditable)
     {
     @Html.ActionLink("Показать переписку", "CorrespondenceWithUser", "Message", new { @id = Model.userId }, null)

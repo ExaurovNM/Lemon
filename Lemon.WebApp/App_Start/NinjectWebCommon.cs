@@ -67,6 +67,8 @@ namespace Lemon.WebApp.App_Start
             kernel.Bind<IAccountService>().To<AccountService>();
             kernel.Bind<IMessageService>().To<MessageService>();
             kernel.Bind<IMessageRepository>().To<MessageRepository>();
+            kernel.Bind<IRatingRepository>().To<RatingRepository>();
+            kernel.Bind<IRatingService>().To<RatingService>();
         }        
     }
 }

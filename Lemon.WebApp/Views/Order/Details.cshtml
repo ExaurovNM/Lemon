@@ -10,8 +10,9 @@
 <h2>@Model.Title</h2>
 @if (Model.IsOwnOrder&&Model.OrderStatus==OrderStatus.InProgress)
 {
-    @Html.ActionLink("Закрыть заказ", "CloseOrder", "Order", new { @id = Model.Id },null);
+    @Html.ActionLink("Закрыть заказ", "CompleteOrder", "Order", new { @id = Model.Id },null);
 }
+<p>Статус заказа: @Model.OrderStatus.ToStringStatus()</p>
 <p>Описание заказа</p>
 
 @Model.Content
@@ -31,13 +32,14 @@ else
     <p>Комментарии</p>
     foreach (var comment in Model.Comments)
     {
-        <div class="comment">
-            <div>@comment.Comment</div>
-            <span class="comment-time">@comment.CreationTimeOut</span><span class="comment-price">@comment.Cost</span>
-        </div>
+    <div class="comment">
+        @Html.ActionLink(comment.AuthorEmail, "UserProfile", "Account", new { @id = comment.AuthorId },null)
+        <div>@comment.Comment</div>
+        <span class="comment-time">@comment.CreationTimeOut</span><span class="comment-price">@comment.Cost</span>
+    </div>
         if (Model.IsOwnOrder&&Model.OrderStatus==OrderStatus.Openned)
         {
-            using (Html.BeginForm("AcceptOffer","Order", routeValues: new {id=Model.Id}))
+            using (Html.BeginForm("AcceptOffer","Order", routeValues: new {orderId=Model.Id,employeeId=comment.AuthorId}))
             {
                 <input type="submit" value="Принять предложение">
             }

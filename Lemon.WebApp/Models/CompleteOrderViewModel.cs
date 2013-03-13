@@ -7,7 +7,7 @@ namespace Lemon.WebApp.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class CloseOrderViewModel
+    public class CompleteOrderViewModel
     {
         public int OrderId { get; set; }
 

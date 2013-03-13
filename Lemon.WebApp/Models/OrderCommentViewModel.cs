@@ -11,7 +11,8 @@ namespace Lemon.WebApp.Models
         {
             this.Comment = comment.Comment;
             this.CreationTime = comment.CreatedTime;
-            Cost = comment.ProposedCost;
+            this.Cost = comment.ProposedCost;
+            this.AuthorId = comment.AuthorId;
         }
 
         public string Comment { get; set; }
@@ -27,5 +28,9 @@ namespace Lemon.WebApp.Models
                 return DateTimeHelper.GetOutTime(CreationTime);
             }
         }
+
+        public int AuthorId { get; set; }
+        
+        public string AuthorEmail { get; set; }
     }
 }

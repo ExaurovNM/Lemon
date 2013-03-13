@@ -4,7 +4,7 @@ namespace Lemon.WebApp.Controllers
 {
     using System;
 
-    using Lemon.DataAccess.Repositories; 
+    using Lemon.DataAccess.Repositories;
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
 
@@ -12,11 +12,13 @@ namespace Lemon.WebApp.Controllers
     {
         private readonly IAuthService authService;
         private readonly IAccountService accountService;
+        private readonly IRatingService ratingService;
 
-        public AccountController(IAuthService authService, IAccountService accountService)
+        public AccountController(IAuthService authService, IAccountService accountService, IRatingService ratingService)
         {
             this.authService = authService;
             this.accountService = accountService;
+            this.ratingService = ratingService;
         }
 
         public ActionResult Register()
@@ -39,7 +41,7 @@ namespace Lemon.WebApp.Controllers
                     ModelState.AddModelError("Email", "Этот e-mail уже используется.");
                     return View(model);
                 }
-               
+
                 authService.Logon(model.Email);
                 return RedirectToAction("Index", "Home");
             }
@@ -81,13 +83,13 @@ namespace Lemon.WebApp.Controllers
             ProfileViewModel model;
             if (currentUser != null && user != null)
             {
-                model = currentUser.Id == user.Id ? new ProfileViewModel(user, true,id) : new ProfileViewModel(user, false,id);
+                model = currentUser.Id == user.Id ? new ProfileViewModel(user, true, id, this.ratingService.GetPositiveRatingForUser(id), this.ratingService.GetNegativeRatingForUser(id), this.ratingService.GetAllCommentsForUser(id)) : new ProfileViewModel(user, false, id, this.ratingService.GetPositiveRatingForUser(id), this.ratingService.GetNegativeRatingForUser(id), this.ratingService.GetAllCommentsForUser(id));
             }
             else
             {
-                model = new ProfileViewModel(user, false,id);
+                model = new ProfileViewModel(user, false, id, this.ratingService.GetPositiveRatingForUser(id), this.ratingService.GetNegativeRatingForUser(id), this.ratingService.GetAllCommentsForUser(id));
             }
-            
+
             return this.View(model);
         }
     }
