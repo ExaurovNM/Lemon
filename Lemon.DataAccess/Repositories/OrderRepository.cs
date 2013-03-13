@@ -15,6 +15,7 @@ namespace Lemon.DataAccess.Repositories
             {
                 
                 order.CreatedTime = DateTime.UtcNow;
+                order.Status = OrderStatus.Openned;
                 context.Orders.Add(order);
                 context.SaveChanges();
             }
@@ -32,7 +33,7 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders.Include("Account").Include("OrderComments").FirstOrDefault(order => order.Id == id);
+                return context.Orders.Include("Account").Include("OrderComments").Include("OrderComments.Author").FirstOrDefault(order => order.Id == id);
             }
         }
 
@@ -40,7 +41,38 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders.Include("Account").Include("OrderComments").Where(order => order.AccountId == id).ToList();
+                return context.Orders.Include("Account").Include("OrderComments.Author").Where(order => order.AccountId == id).ToList();
+            }
+        }
+
+        public void ChangeOrderStatus(int orderId, int newStatus)
+        {
+            using (var context = new DataBaseContext())
+            {
+                context.Orders.FirstOrDefault(order => order.Id == orderId).Status = newStatus;
+                context.SaveChanges();
+            }
+        }
+
+        public List<Order> GetByStatusId(int statusId)
+        {
+            using (var context = new DataBaseContext())
+            {
+                return
+                    context.Orders.Include("Account")
+                           .Include("OrderComments.Author")
+                           .Where(ord => ord.Status == statusId)
+                           .OrderByDescending(order => order.CreatedTime)
+                           .ToList();
+            }
+        }
+
+        public void ChangeOrderEmployee(int orderId, int? employeeId)
+        {
+            using (var context = new DataBaseContext())
+            {
+                context.Orders.FirstOrDefault(order => order.Id == orderId).EmployeeId = employeeId;
+                context.SaveChanges();
             }
         }
     }

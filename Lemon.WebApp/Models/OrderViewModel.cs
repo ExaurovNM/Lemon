@@ -28,7 +28,11 @@ namespace Lemon.WebApp.Models
             this.ProbableCost = order.ProbableCost;
             this.Comments = order.OrderComments == null
                                 ? null
-                                : order.OrderComments.Select(comment => new OrderCommentViewModel(comment)).ToList();
+                                : order.OrderComments.Select(
+                                    comment => new OrderCommentViewModel(comment) { AuthorEmail = comment.Author.Email })
+                                       .ToList();
+
+            this.OrderStatus = order.Status;
         }
 
         public IList<OrderCommentViewModel> Comments { get; set; }
@@ -54,5 +58,9 @@ namespace Lemon.WebApp.Models
         }
 
         public int Id { get; set; }
+
+        public bool IsOwnOrder { get; set; }
+
+        public int OrderStatus { get; set; }
     }
 }

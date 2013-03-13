@@ -1,4 +1,5 @@
 ﻿@using Lemon.Common
+@using Lemon.DataAccess.DomainModels
 @using Lemon.WebApp.Models
 @model Lemon.WebApp.Models.OrderViewModel
 
@@ -7,29 +8,48 @@
 }
 
 <h2>@Model.Title</h2>
+@if (Model.IsOwnOrder&&Model.OrderStatus==OrderStatus.InProgress)
+{
+    @Html.ActionLink("Закрыть заказ", "CompleteOrder", "Order", new { @id = Model.Id },null);
+}
+<p>Статус заказа: @Model.OrderStatus.ToStringStatus()</p>
 <p>Описание заказа</p>
 
 @Model.Content
-<br/>
-@Html.ActionLink("Профиль пользователя", "UserProfile", "Account", new {@id = Model.OwnerId}, null)
-@if(Model.Comments == null || Model.Comments.Count == 0)
+@Model.ProbableCost
+<br />
+@Html.ActionLink("Профиль пользователя", "UserProfile", "Account", new { @id = Model.OwnerId }, null)
+@if (Model.Comments == null || Model.Comments.Count == 0)
 {
     <p>Нет ни одного комментария на это задание.</p>
+    if (!Model.IsOwnOrder)
+    {
     <p>Будь первым!</p>
+    }
 }
-else{
+else
+{
     <p>Комментарии</p>
     foreach (var comment in Model.Comments)
     {
-        <div class="comment">
-            <div>@comment.Comment</div>
-            <span class="comment-time">@comment.CreationTimeOut</span><span class="comment-price">@comment.Cost</span>
-        </div>
+    <div class="comment">
+        @Html.ActionLink(comment.AuthorEmail, "UserProfile", "Account", new { @id = comment.AuthorId },null)
+        <div>@comment.Comment</div>
+        <span class="comment-time">@comment.CreationTimeOut</span><span class="comment-price">@comment.Cost</span>
+    </div>
+        if (Model.IsOwnOrder&&Model.OrderStatus==OrderStatus.Openned)
+        {
+            using (Html.BeginForm("AcceptOffer","Order", routeValues: new {orderId=Model.Id,employeeId=comment.AuthorId}))
+            {
+                <input type="submit" value="Принять предложение">
+            }
+        }
     }
-   
+
 }
-
-@Html.Partial("_OrderCommentPartial", new CreateCommentModel { OrderId = Model.Id })
-
+@if (!Model.IsOwnOrder)
+{
+    @Html.Partial("_OrderCommentPartial", new CreateCommentModel { OrderId = Model.Id })
+}
 
 

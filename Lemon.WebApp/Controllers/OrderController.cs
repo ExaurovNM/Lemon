@@ -2,6 +2,7 @@
 
 namespace Lemon.WebApp.Controllers
 {
+    using Lemon.DataAccess.DomainModels;
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
     using Lemon.WebApp.WebHelpers;
@@ -11,11 +12,13 @@ namespace Lemon.WebApp.Controllers
     {
         private readonly IAuthService authService;
         private readonly IOrderService orderService;
+        private readonly IRatingService ratingService;
 
-        public OrderController(IAuthService authService, IOrderService orderService)
+        public OrderController(IAuthService authService, IOrderService orderService, IRatingService ratingService)
         {
             this.authService = authService;
             this.orderService = orderService;
+            this.ratingService = ratingService;
         }
 
         public ActionResult Create()
@@ -23,7 +26,7 @@ namespace Lemon.WebApp.Controllers
             var model = new OrderCreateViewModel();
             var user = authService.GetCurrentUser();
             model.UserId = user.Id;
-            
+
             return View(model);
         }
 
@@ -34,7 +37,7 @@ namespace Lemon.WebApp.Controllers
             {
                 return View(model);
             }
-            
+
             var user = this.authService.GetCurrentUser();
             if (user.Id != model.UserId)
             {
@@ -52,7 +55,7 @@ namespace Lemon.WebApp.Controllers
         {
             var order = orderService.GetById(id);
             var model = new OrderViewModel(order);
-
+            model.IsOwnOrder = this.authService.GetCurrentUser().Id == order.AccountId;
             return View(model);
         }
 
@@ -70,6 +73,42 @@ namespace Lemon.WebApp.Controllers
             }
 
             return RedirectToAction("Details", "Order", new { @id = model.OrderId });
+        }
+
+
+        [HttpPost]
+        public ActionResult AcceptOffer(int orderId, int employeeId)
+        {
+            if (this.authService.GetCurrentUser().Id == this.orderService.GetById(orderId).AccountId)
+            {
+                this.orderService.AcceptOffer(orderId, employeeId);
+            }
+            return this.RedirectToAction("Details", "Order", new { @id = orderId });
+        }
+
+        public ActionResult CompleteOrder(int id)
+        {
+            if (orderService.GetById(id).AccountId == authService.GetCurrentUser().Id)
+            {
+                return View(new CompleteOrderViewModel { OrderId = id });
+            }
+            return this.RedirectToAction("Details", "Order", new { @id = id });
+        }
+
+        [HttpPost]
+        public ActionResult CompleteOrder(CompleteOrderViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            ratingService.AddRaiting(
+                new UserRating
+                    {
+                        Comment = model.Comment,
+                        Rating = (bool)model.Raiting,
+                        RatingSenderId = this.authService.GetCurrentUser().Id,
+                        RatingRecieverId = (int)this.orderService.GetById(model.OrderId).EmployeeId
+                    });
+            orderService.ChangeOrderStatus(model.OrderId, OrderStatus.Completed);
+            return this.RedirectToAction("Details", "Order", new { @id = model.OrderId });
         }
     }
 }

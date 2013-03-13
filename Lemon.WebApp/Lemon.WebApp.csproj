@@ -137,6 +137,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\MyController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Models\CompleteOrderViewModel.cs" />
     <Compile Include="Models\CreateMessageModel.cs" />
     <Compile Include="Models\MessagesViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
@@ -145,6 +146,8 @@
     <Compile Include="Models\LastMessagesListViewModel.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\IRatingService.cs" />
+    <Compile Include="Services\RatingService.cs" />
     <Compile Include="WebHelpers\BaseViewPage.cs" />
     <Compile Include="WebHelpers\BaseViewPageGeneric.cs" />
     <Compile Include="WebHelpers\ExportModelStateToTempData.cs" />
@@ -270,6 +273,7 @@
     <Content Include="Views\Message\_SendMessagePartial.cshtml" />
     <Content Include="Views\Message\All.cshtml" />
     <Content Include="Views\Message\CorrespondenceWithUser.cshtml" />
+    <Content Include="Views\Order\CompleteOrder.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -4,6 +4,7 @@ namespace Lemon.WebApp.Controllers
 {
     using System.Linq;
 
+    using Lemon.DataAccess.DomainModels;
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
 
@@ -20,7 +21,7 @@ namespace Lemon.WebApp.Controllers
         {
             var model = new MainPageViewModel
                 { 
-                    Orders = this.orderService.Items().Select(order => new OrderViewModel(order)).ToList() 
+                    Orders = this.orderService.GetByStatusId(OrderStatus.Openned).Select(order => new OrderViewModel(order)).ToList() 
                 };
             return View(model);
         }

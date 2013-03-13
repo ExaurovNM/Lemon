@@ -15,5 +15,13 @@
         void AddCommentToOrder(OrderComment orderComment);
 
         List<Order> GetByUserId(int id);
+
+        void ChangeOrderStatus(int orderId, int newStatus);
+
+        List<Order> GetByStatusId(int statusId);
+
+        void AcceptOffer(int orderId, int employeeId);
+
+        void ChangeOrderEmployee(int orderId, int employeeId);
     }
 }
