@@ -13,7 +13,6 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                
                 order.CreatedTime = DateTime.UtcNow;
                 order.Status = OrderStatus.Openned;
                 context.Orders.Add(order);

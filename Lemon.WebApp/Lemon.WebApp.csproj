@@ -145,9 +145,11 @@
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\LastMessagesListViewModel.cs" />
     <Compile Include="Services\IMessageService.cs" />
+    <Compile Include="Services\IUserEventsService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\IRatingService.cs" />
     <Compile Include="Services\RatingService.cs" />
+    <Compile Include="Services\UserEventsService.cs" />
     <Compile Include="WebHelpers\BaseViewPage.cs" />
     <Compile Include="WebHelpers\BaseViewPageGeneric.cs" />
     <Compile Include="WebHelpers\ExportModelStateToTempData.cs" />

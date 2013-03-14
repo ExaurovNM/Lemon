@@ -11,16 +11,22 @@ namespace Lemon.WebApp.Services
     {
         private readonly IOrderRepository orderRepository;
         private readonly IOrderCommentRepository orderCommentRepository;
+        private readonly IUserEventsService eventsService;
 
-        public OrderService(IOrderRepository orderRepository, IOrderCommentRepository orderCommentRepository)
+        public OrderService(
+            IOrderRepository orderRepository,
+            IOrderCommentRepository orderCommentRepository,
+            IUserEventsService eventsService)
         {
             this.orderRepository = orderRepository;
             this.orderCommentRepository = orderCommentRepository;
+            this.eventsService = eventsService;
         }
 
         public void Create(Order order)
         {
             this.orderRepository.Create(order);
+            this.eventsService.AddEvent(order);
         }
 
         public List<Order> Items()
@@ -36,6 +42,8 @@ namespace Lemon.WebApp.Services
         public void AddCommentToOrder(OrderComment orderComment)
         {
             this.orderCommentRepository.AddCommentToOrder(orderComment);
+            var order = orderRepository.GetById(orderComment.OrderId);
+            this.eventsService.AddEvent(orderComment, order.AccountId);
         }
 
         public List<Order> GetByUserId(int id)
@@ -60,7 +68,6 @@ namespace Lemon.WebApp.Services
         {
             this.ChangeOrderStatus(orderId, OrderStatus.InProgress);
             this.ChangeOrderEmployee(orderId, employeeId);
-            
         }
 
         public void ChangeOrderEmployee(int orderId, int employeeId)
@@ -81,12 +88,7 @@ namespace Lemon.WebApp.Services
                 return false;
             }
 
-            if (order.OrderComments.Any(comment => comment.AuthorId == userId))
-            {
-                return false;
-            }
-
-            return true;
+            return order.OrderComments.All(comment => comment.AuthorId != userId);
         }
     }
 }

@@ -20,6 +20,8 @@
 
         public DbSet<UserRating> UserRatings { get; set; }
 
+        public DbSet<UserEvent> UserEvents { get; set; } 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>().HasMany(account => account.Orders).WithRequired(order => order.Account).WillCascadeOnDelete();

@@ -8,7 +8,6 @@ namespace Lemon.WebApp.App_Start
 
     using Lemon.Common;
     using Lemon.DataAccess.Repositories;
-    using Lemon.WebApp.Controllers;
     using Lemon.WebApp.Services;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -16,20 +15,20 @@ namespace Lemon.WebApp.App_Start
     using Ninject;
     using Ninject.Web.Common;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -37,7 +36,7 @@ namespace Lemon.WebApp.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -47,7 +46,7 @@ namespace Lemon.WebApp.App_Start
             var kernel = new StandardKernel();
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-            
+
             RegisterServices(kernel);
             return kernel;
         }
@@ -69,6 +68,8 @@ namespace Lemon.WebApp.App_Start
             kernel.Bind<IMessageRepository>().To<MessageRepository>();
             kernel.Bind<IRatingRepository>().To<RatingRepository>();
             kernel.Bind<IRatingService>().To<RatingService>();
-        }        
+            kernel.Bind<IUserEventsRepository>().To<UserEventsRepository>();
+            kernel.Bind<IUserEventsService>().To<UserEventsService>();
+        }
     }
 }
