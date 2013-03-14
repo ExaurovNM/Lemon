@@ -4,6 +4,8 @@
     {
         public const int OrderEvent = 1;
 
-        public const int CommentEvent = 2;
+        public const int NewCommentTOwnedOrderEvent = 2;
+
+        public const int NewCommentToOrderByEmployeeEvent = 3;
     }
 }

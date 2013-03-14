@@ -1,5 +1,7 @@
 namespace Lemon.WebApp.Services
 {
+    using System.Collections.Generic;
+
     using Lemon.DataAccess.DomainModels;
     using Lemon.DataAccess.Repositories;
 
@@ -19,6 +21,7 @@ namespace Lemon.WebApp.Services
                     Description = order.Title,
                     OrderId = order.Id,
                     EventSunscriberId = order.AccountId,
+                    EventPublisherId = order.AccountId,
                     EventType = UserEventType.OrderEvent
                 };
             this.Save(userEvent);
@@ -26,16 +29,33 @@ namespace Lemon.WebApp.Services
 
         public void AddEvent(OrderComment orderComment, int accountId)
         {
-            var userEvent = new UserEvent
+            var orderOwnerEvent = new UserEvent
             {
                 Description = orderComment.Comment,
                 OrderId = orderComment.OrderId,
                 EventSunscriberId = accountId,
                 EventPublisherId = orderComment.AuthorId,
-                EventType = UserEventType.CommentEvent,
+                EventType = UserEventType.NewCommentTOwnedOrderEvent,
                 CommentId = orderComment.Id
             };
-            this.Save(userEvent);
+
+            var orderEmployeeEvent = new UserEvent
+            {
+                Description = orderComment.Comment,
+                OrderId = orderComment.OrderId,
+                EventSunscriberId = orderComment.AuthorId,
+                EventPublisherId = orderComment.AuthorId,
+                EventType = UserEventType.NewCommentToOrderByEmployeeEvent,
+                CommentId = orderComment.Id
+            };
+
+            this.Save(orderOwnerEvent);
+            this.Save(orderEmployeeEvent);
+        }
+
+        public IList<UserEvent> GetByUserId(int userId)
+        {
+            return this.userEventsRepository.GetByUserId(userId);
         }
 
         private void Save(UserEvent userEvent)

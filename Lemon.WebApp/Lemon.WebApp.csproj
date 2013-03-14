@@ -139,8 +139,10 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Models\CompleteOrderViewModel.cs" />
     <Compile Include="Models\CreateMessageModel.cs" />
+    <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\MessagesViewModel.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
+    <Compile Include="Models\MyEventsViewModel.cs" />
     <Compile Include="Models\MyOrdersViewModel.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\LastMessagesListViewModel.cs" />
@@ -276,6 +278,7 @@
     <Content Include="Views\Message\All.cshtml" />
     <Content Include="Views\Message\CorrespondenceWithUser.cshtml" />
     <Content Include="Views\Order\CompleteOrder.cshtml" />
+    <Content Include="Views\My\Events.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

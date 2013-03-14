@@ -13,5 +13,7 @@ namespace Lemon.WebApp.Services
         void Logout();
 
         Account GetCurrentUser();
+
+        int? GetCurrentUserId();
     }
 }

@@ -1,7 +1,6 @@
 namespace Lemon.WebApp.Services
 {
     using System;
-    using System.Linq;
     using System.Web;
     using System.Web.Script.Serialization;
     using System.Web.Security;
@@ -100,6 +99,17 @@ namespace Lemon.WebApp.Services
                 return null;
             }
             return accountRepository.GetById(identity.Id);
+        }
+
+        public int? GetCurrentUserId()
+        {
+            var context = HttpContext.Current;
+            var identity = (ICustomPrincipal)context.User;
+            if (!identity.Identity.IsAuthenticated)
+            {
+                return null;
+            }
+            return identity.Id;
         }
     }
 }
