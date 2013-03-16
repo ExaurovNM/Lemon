@@ -1,0 +1,20 @@
+﻿@model Lemon.WebApp.Models.MyEventsViewModel
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>Events</h2>
+
+@if (Model.Events == null || Model.Events.Count == 0)
+{
+    <span>Нет событий :(</span>
+}
+else
+{
+    foreach (var evend in Model.Events)
+    {
+        @evend.Description
+        <br />
+    }
+}
