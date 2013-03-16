@@ -151,3 +151,8 @@ textarea {
 .comment-price {
     margin-left: 50px;
 }
+
+
+.search input[type="text"]{
+    width: 85%
+}

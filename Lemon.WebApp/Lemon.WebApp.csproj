@@ -279,6 +279,7 @@
     <Content Include="Views\Message\CorrespondenceWithUser.cshtml" />
     <Content Include="Views\Order\CompleteOrder.cshtml" />
     <Content Include="Views\My\Events.cshtml" />
+    <Content Include="Views\Shared\Search.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

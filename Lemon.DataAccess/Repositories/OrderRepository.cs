@@ -74,5 +74,22 @@ namespace Lemon.DataAccess.Repositories
                 context.SaveChanges();
             }
         }
+
+        public List<Order> GetByKeyWords(IEnumerable<string> keyWords)
+        {
+            var result = new List<Order>();
+            using (var context = new DataBaseContext())
+            {
+                foreach (var keyWord in keyWords)
+                {
+                    result.AddRange(
+                        context.Orders.Include("Account").Include("OrderComments").Include("OrderComments.Author")
+                        .Where(order => 
+                            order.Title.ToLower().Contains(keyWord.ToLower()) 
+                            || order.Content.ToLower().Contains(keyWord.ToLower())));
+                }
+            }
+            return result.Distinct().OrderByDescending(order => order.CreatedTime).ToList();
+        }
     }
 }

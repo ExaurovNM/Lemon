@@ -25,5 +25,7 @@
         void ChangeOrderEmployee(int orderId, int employeeId);
 
         bool IsCanComment(int userId, int orderId);
+
+        List<Order> GetBySearchString(string searchString);
     }
 }

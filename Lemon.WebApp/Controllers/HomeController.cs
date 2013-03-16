@@ -17,11 +17,12 @@ namespace Lemon.WebApp.Controllers
             this.orderService = orderService;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(string searchString)
         {
             var model = new MainPageViewModel
                 { 
-                    Orders = this.orderService.GetByStatusId(OrderStatus.Openned).Select(order => new OrderViewModel(order)).ToList() 
+                    Orders = this.orderService.GetBySearchString(searchString).Select(order => new OrderViewModel(order)).ToList() 
                 };
             return View(model);
         }

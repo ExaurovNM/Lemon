@@ -90,5 +90,15 @@ namespace Lemon.WebApp.Services
 
             return order.OrderComments.All(comment => comment.AuthorId != userId);
         }
+
+        public List<Order> GetBySearchString(string searchString)
+        {
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                return orderRepository.GetByStatusId(OrderStatus.Openned).ToList();
+            }
+            IEnumerable<string> keyWords = searchString.Split(' ', ',', '.').Where(word => word != null);
+            return this.orderRepository.GetByKeyWords(keyWords).Where(order => order.Status == OrderStatus.Openned).ToList();
+        }
     }
 }
