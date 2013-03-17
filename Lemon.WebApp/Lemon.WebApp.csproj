@@ -144,6 +144,7 @@
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\MyEventsViewModel.cs" />
     <Compile Include="Models\MyOrdersViewModel.cs" />
+    <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\LastMessagesListViewModel.cs" />
     <Compile Include="Services\IMessageService.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IOrderService.cs" />
     <Compile Include="Services\OrderService.cs" />
+    <Compile Include="WebHelpers\PagingHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\background.png" />
@@ -279,6 +281,7 @@
     <Content Include="Views\Message\CorrespondenceWithUser.cshtml" />
     <Content Include="Views\Order\CompleteOrder.cshtml" />
     <Content Include="Views\My\Events.cshtml" />
+    <Content Include="Views\Shared\Search.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

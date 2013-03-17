@@ -1,10 +1,11 @@
 ﻿@using Lemon.Common
+@using SportsStore.WebUI.HtmlHelpers
 @model Lemon.WebApp.Models.MainPageViewModel
 
 @{
     ViewBag.Title = "Just a test";
 }
-
+@Html.Partial("Search")
 @foreach (var order in Model.Orders)
 {
     <div class="order-preview-holder">
@@ -14,3 +15,7 @@
         <div class="order-content ">@order.Content.AutoEllipses(100)</div>
     </div>
 }
+<div class="pager">
+   @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", 
+        new {page = x, searchString = Model.SearchString}))
+</div>

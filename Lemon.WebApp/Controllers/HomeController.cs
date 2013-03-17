@@ -8,8 +8,11 @@ namespace Lemon.WebApp.Controllers
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
 
+    using SportsStore.WebUI.Models;
+
     public class HomeController : Controller
     {
+        private int pageSize = 5;
         private readonly IOrderService orderService;
 
         public HomeController(IOrderService orderService)
@@ -17,11 +20,15 @@ namespace Lemon.WebApp.Controllers
             this.orderService = orderService;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(string searchString, int page = 1)
         {
+            var allOrders = this.orderService.GetBySearchString(searchString);
             var model = new MainPageViewModel
-                { 
-                    Orders = this.orderService.GetByStatusId(OrderStatus.Openned).Select(order => new OrderViewModel(order)).ToList() 
+                {
+                    Orders = allOrders.Skip((page - 1) * pageSize).Select(order => new OrderViewModel(order)).ToList(),
+                    PagingInfo = new PagingInfo { CurrentPage = page, TotalItems = allOrders.Count(), ItemsPerPage = pageSize },
+                    SearchString = searchString
                 };
             return View(model);
         }

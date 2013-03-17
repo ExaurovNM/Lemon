@@ -1,0 +1,7 @@
+﻿@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <div class="search">
+        @Html.TextBox("searchString")
+        <input type="submit" value="Поиск" />
+    </div>
+}

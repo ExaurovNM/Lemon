@@ -19,5 +19,7 @@
         List<Order> GetByStatusId(int statusId);
 
         void ChangeOrderEmployee(int orderId, int? employeeId);
+
+        List<Order> GetByKeyWords(IEnumerable<string> keyWords);
     }
 }

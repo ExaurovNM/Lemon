@@ -68,7 +68,7 @@ legend {
 
 
 /*----------------------------*/
-input[type="submit"]{
+input[type="submit"] {
     border-radius: 20px;
     font-size: 16px;
     padding: 10px;
@@ -84,13 +84,13 @@ input[type="submit"]{
     text-decoration: none;
 }
 
-.order-title:visited {
-    color: rgb(100, 100, 100)
-}
+    .order-title:visited {
+        color: rgb(100, 100, 100);
+    }
 
-.order-title:hover {
-    text-decoration: underline;
-}
+    .order-title:hover {
+        text-decoration: underline;
+    }
 
 
 .order-time {
@@ -115,18 +115,18 @@ input[type="submit"]{
     position: relative;
 }
 
-.form-item label {
-    width: 180px;
-    display: inline-block;
-    vertical-align: top;
-    font-size: 16px;
-}
+    .form-item label {
+        width: 180px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 16px;
+    }
 
 input[type="text"],
 input[type="password"] {
     width: 250px;
     height: 28px;
-    box-shadow:  1px 1px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.3);
     font-size: 16px;
 }
 
@@ -145,9 +145,37 @@ textarea {
 }
 
 .comment-time {
-    
 }
 
 .comment-price {
     margin-left: 50px;
+}
+
+
+.search input[type="text"] {
+    width: 85%;
+}
+
+DIV.pager {
+    text-align: right;
+    border-top: 2px solid silver;
+    padding: .5em 0 0 0;
+    margin-top: 1em;
+}
+
+DIV.pager A {
+    font: bold 1em "Arial Narrow", "Franklin Gothic Medium", Arial;
+    font-size: 1.1em;
+    color: #666;
+    text-decoration: none;
+    padding: 0 .4em 0 .4em;
+}
+
+DIV.pager A:hover {
+    background-color: Silver;
+}
+
+DIV.pager A.selected {
+    background-color: #353535;
+    color: White;
 }
