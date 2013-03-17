@@ -1,4 +1,5 @@
 ﻿@using Lemon.Common
+@using SportsStore.WebUI.HtmlHelpers
 @model Lemon.WebApp.Models.MainPageViewModel
 
 @{
@@ -14,3 +15,7 @@
         <div class="order-content ">@order.Content.AutoEllipses(100)</div>
     </div>
 }
+<div class="pager">
+   @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", 
+        new {page = x, searchString = Model.SearchString}))
+</div>
