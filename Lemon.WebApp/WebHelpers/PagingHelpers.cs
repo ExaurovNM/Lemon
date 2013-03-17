@@ -12,13 +12,13 @@ namespace SportsStore.WebUI.HtmlHelpers
     {
         public static MvcHtmlString PageLinks(this HtmlHelper html, PagingInfo pagingInfo, Func<int, string> pageUrl)
         {
-            StringBuilder result = new StringBuilder();
-            for (int i = 1; i <= pagingInfo.TotalPages; i++)
+            var result = new StringBuilder();
+            for (var index = 1; index <= pagingInfo.TotalPages; index++)
             {
-                TagBuilder tag = new TagBuilder("a");
-                tag.MergeAttribute("href", pageUrl(i));
-                tag.InnerHtml = i.ToString();
-                if (i == pagingInfo.CurrentPage)
+                var tag = new TagBuilder("a");
+                tag.MergeAttribute("href", pageUrl(index));
+                tag.InnerHtml = index.ToString();
+                if (index == pagingInfo.CurrentPage)
                     tag.AddCssClass("selected");
                 result.Append(tag);
             }

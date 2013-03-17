@@ -16,10 +16,10 @@
 
         void ChangeOrderStatus(int orderId, int newStatus);
 
-        List<Order> GetByStatusId(int statusId);
+        List<Order> GetByStatusId(int statusId, int takeCount, int skipCount);
 
         void ChangeOrderEmployee(int orderId, int? employeeId);
 
-        List<Order> GetByKeyWords(IEnumerable<string> keyWords);
+        List<Order> GetByKeyWords(IEnumerable<string> keyWords, int orderStatus, int takeCount, int skipCount);
     }
 }

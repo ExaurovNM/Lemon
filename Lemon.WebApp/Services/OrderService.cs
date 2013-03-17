@@ -59,11 +59,6 @@ namespace Lemon.WebApp.Services
             }
         }
 
-        public List<Order> GetByStatusId(int statusId)
-        {
-            return this.orderRepository.GetByStatusId(statusId);
-        }
-
         public void AcceptOffer(int orderId, int employeeId)
         {
             this.ChangeOrderStatus(orderId, OrderStatus.InProgress);
@@ -91,14 +86,17 @@ namespace Lemon.WebApp.Services
             return order.OrderComments.All(comment => comment.AuthorId != userId);
         }
 
-        public List<Order> GetBySearchString(string searchString)
+        public List<Order> GetBySearchString(string searchString, int pageSize, int pageNumber)
         {
+            var takeCount = pageSize;
+            var skipCount = (pageNumber - 1) * pageSize;
+
             if (string.IsNullOrWhiteSpace(searchString))
             {
-                return orderRepository.GetByStatusId(OrderStatus.Openned).ToList();
+                return orderRepository.GetByStatusId(OrderStatus.Openned, takeCount, skipCount).ToList();
             }
-            IEnumerable<string> keyWords = searchString.Split(' ', ',', '.').Where(word => word != null);
-            return this.orderRepository.GetByKeyWords(keyWords).Where(order => order.Status == OrderStatus.Openned).ToList();
+            var keyWords = searchString.Split(' ', ',', '.').Where(word => word != null);
+            return this.orderRepository.GetByKeyWords(keyWords, OrderStatus.Openned, takeCount, skipCount);
         }
     }
 }

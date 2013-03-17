@@ -53,7 +53,7 @@ namespace Lemon.DataAccess.Repositories
             }
         }
 
-        public List<Order> GetByStatusId(int statusId)
+        public List<Order> GetByStatusId(int statusId, int takeCount, int skipCount)
         {
             using (var context = new DataBaseContext())
             {
@@ -62,6 +62,8 @@ namespace Lemon.DataAccess.Repositories
                            .Include("OrderComments.Author")
                            .Where(ord => ord.Status == statusId)
                            .OrderByDescending(order => order.CreatedTime)
+                           .Skip(skipCount)
+                           .Take(takeCount)
                            .ToList();
             }
         }
@@ -75,21 +77,24 @@ namespace Lemon.DataAccess.Repositories
             }
         }
 
-        public List<Order> GetByKeyWords(IEnumerable<string> keyWords)
+        public List<Order> GetByKeyWords(IEnumerable<string> keyWords, int orderStatus, int takeCount, int skipCount)
         {
-            var result = new List<Order>();
             using (var context = new DataBaseContext())
             {
-                foreach (var keyWord in keyWords)
-                {
-                    result.AddRange(
-                        context.Orders.Include("Account").Include("OrderComments").Include("OrderComments.Author")
-                        .Where(order => 
-                            order.Title.ToLower().Contains(keyWord.ToLower()) 
-                            || order.Content.ToLower().Contains(keyWord.ToLower())));
-                }
+                return
+                    context
+                    .Orders
+                    .Include("Account")
+                    .Include("OrderComments")
+                    .Include("OrderComments.Author")
+                    .Where(order => order.Status == orderStatus)
+                    .Where(order =>
+                            keyWords.Any(
+                                keyWord =>
+                                order.Title.ToLower().Contains(keyWord.ToLower())
+                                || order.Content.Contains(keyWord.ToLower()))).OrderByDescending(
+                                    order => order.CreatedTime).Skip(skipCount).Take(takeCount).ToList();
             }
-            return result.Distinct().OrderByDescending(order => order.CreatedTime).ToList();
         }
     }
 }

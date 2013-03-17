@@ -4,7 +4,6 @@ namespace Lemon.WebApp.Controllers
 {
     using System;
 
-    using Lemon.DataAccess.Repositories;
     using Lemon.WebApp.Models;
     using Lemon.WebApp.Services;
 

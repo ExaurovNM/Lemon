@@ -18,14 +18,12 @@
 
         void ChangeOrderStatus(int orderId, int newStatus);
 
-        List<Order> GetByStatusId(int statusId);
-
         void AcceptOffer(int orderId, int employeeId);
 
         void ChangeOrderEmployee(int orderId, int employeeId);
 
         bool IsCanComment(int userId, int orderId);
 
-        List<Order> GetBySearchString(string searchString);
+        List<Order> GetBySearchString(string searchString, int pageSize, int pageNumber);
     }
 }
