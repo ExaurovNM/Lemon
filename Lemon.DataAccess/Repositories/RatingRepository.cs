@@ -23,7 +23,7 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context=new DataBaseContext())
             {
-                return context.UserRatings.Where(userRating => userRating.RatingRecieverId == employeeId).ToList();
+                return context.UserRatings.Where(userRating => userRating.RatingReceiverId == employeeId).ToList();
             }
         }
 
@@ -33,7 +33,7 @@ namespace Lemon.DataAccess.Repositories
             {
                 return
                     context.UserRatings.Count(
-                        userRating => (userRating.RatingRecieverId == userId && userRating.Rating));
+                        userRating => (userRating.RatingReceiverId == userId && userRating.Rating));
             }
         }
 
@@ -43,7 +43,7 @@ namespace Lemon.DataAccess.Repositories
             {
                 return
                     context.UserRatings.Count(
-                        userRating => (userRating.RatingRecieverId == userId && !userRating.Rating));
+                        userRating => (userRating.RatingReceiverId == userId && !userRating.Rating));
             }
         }
     }

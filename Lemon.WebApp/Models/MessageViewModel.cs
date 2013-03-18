@@ -10,10 +10,10 @@ namespace Lemon.WebApp.Models
         {
             Text = message.Text;
             Created = message.CreatedTime;
-            ReciverId = message.ReciverId;
+            ReciverId = message.ReceiverId;
             SenderId = message.SenderId;
             SenderEmail = message.Sender.Email;
-            ReciverEmail = message.Reciver.Email;
+            ReciverEmail = message.Receiver.Email;
         }
 
         public string Text { get; set; }

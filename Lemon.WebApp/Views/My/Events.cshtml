@@ -1,4 +1,5 @@
-﻿@model Lemon.WebApp.Models.MyEventsViewModel
+﻿@using Lemon.Common
+@model Lemon.WebApp.Models.MyEventsViewModel
 
 @{
     ViewBag.Title = "title";
@@ -14,7 +15,7 @@ else
 {
     foreach (var evend in Model.Events)
     {
-        @evend.Description
+        @Html.ActionLink(evend.EventPublisherName, "UserProfile", "Account") @evend.Description @DateTimeHelper.GetOutTime(evend.Time);
         <br />
     }
 }

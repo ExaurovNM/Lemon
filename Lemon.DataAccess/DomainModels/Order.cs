@@ -4,9 +4,9 @@ namespace Lemon.DataAccess.DomainModels
 
     public class Order : BaseEntity
     {
-        public virtual Account Account { get; set; }
+        public virtual Account Creater { get; set; }
 
-        public int AccountId { get; set; }
+        public int CreaterId { get; set; }
 
         public string Title { get; set; }
 

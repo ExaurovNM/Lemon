@@ -20,8 +20,8 @@ namespace Lemon.WebApp.Services
                 {
                     Description = order.Title,
                     OrderId = order.Id,
-                    EventSunscriberId = order.AccountId,
-                    EventPublisherId = order.AccountId,
+                    EventSunscriberId = order.CreaterId,
+                    EventPublisherId = order.CreaterId,
                     EventType = UserEventType.OrderEvent
                 };
             this.Save(userEvent);

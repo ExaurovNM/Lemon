@@ -57,7 +57,7 @@ namespace Lemon.WebApp.Controllers
             var user = authService.GetCurrentUser();
             var canComment = orderService.IsCanComment(user.Id, id);
             var model = new OrderViewModel(order, canComment);
-            model.IsOwnOrder = this.authService.GetCurrentUser().Id == order.AccountId;
+            model.IsOwnOrder = this.authService.GetCurrentUser().Id == order.CreaterId;
             return View(model);
         }
 
@@ -81,7 +81,7 @@ namespace Lemon.WebApp.Controllers
         [HttpPost]
         public ActionResult AcceptOffer(int orderId, int employeeId)
         {
-            if (this.authService.GetCurrentUser().Id == this.orderService.GetById(orderId).AccountId)
+            if (this.authService.GetCurrentUser().Id == this.orderService.GetById(orderId).CreaterId)
             {
                 this.orderService.AcceptOffer(orderId, employeeId);
             }
@@ -90,7 +90,7 @@ namespace Lemon.WebApp.Controllers
 
         public ActionResult CompleteOrder(int id)
         {
-            if (orderService.GetById(id).AccountId == authService.GetCurrentUser().Id)
+            if (orderService.GetById(id).CreaterId == authService.GetCurrentUser().Id)
             {
                 return View(new CompleteOrderViewModel { OrderId = id });
             }
@@ -107,7 +107,7 @@ namespace Lemon.WebApp.Controllers
                         Comment = model.Comment,
                         Rating = (bool)model.Raiting,
                         RatingSenderId = this.authService.GetCurrentUser().Id,
-                        RatingRecieverId = (int)this.orderService.GetById(model.OrderId).EmployeeId
+                        RatingReceiverId = (int)this.orderService.GetById(model.OrderId).EmployeeId
                     });
             orderService.ChangeOrderStatus(model.OrderId, OrderStatus.Completed);
             return this.RedirectToAction("Details", "Order", new { @id = model.OrderId });

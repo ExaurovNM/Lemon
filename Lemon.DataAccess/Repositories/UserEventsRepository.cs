@@ -24,6 +24,7 @@ namespace Lemon.DataAccess.Repositories
             using (var context = new DataBaseContext())
             {
                 return context.UserEvents
+                    .Include("EventPublisher")
                     .Where(evend => evend.EventSunscriberId == userId)
                     .OrderByDescending(evend => evend.CreatedTime).ToList();
             }

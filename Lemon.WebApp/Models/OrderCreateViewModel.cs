@@ -20,7 +20,7 @@ namespace Lemon.WebApp.Models
         {
             return new Order
                 {
-                    AccountId = UserId,
+                    CreaterId = UserId,
                     Content = Content,
                     Title = Title,
                     ProbableCost = ProbableCost

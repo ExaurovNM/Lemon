@@ -27,9 +27,9 @@ using System.Collections.Generic;
                 
                 return
                     context.Messages
-                    .Include(message => message.Reciver)
+                    .Include(message => message.Receiver)
                     .Include(message => message.Sender)
-                    .Where(message => (message.SenderId == senderId && message.ReciverId == recieverId)).ToList();
+                    .Where(message => (message.SenderId == senderId && message.ReceiverId == recieverId)).ToList();
                 
             }
         }
@@ -39,7 +39,7 @@ using System.Collections.Generic;
             {
                 return 
                     context.Messages
-                    .Include(message => message.Reciver)
+                    .Include(message => message.Receiver)
                     .Include(message => message.Sender)
                     .Where(message => (message.SenderId == senderId))
                     .ToList();
@@ -52,9 +52,9 @@ using System.Collections.Generic;
             {
                 return
                     context.Messages
-                    .Include(message => message.Reciver)
+                    .Include(message => message.Receiver)
                     .Include(message => message.Sender)
-                    .Where(message => (message.ReciverId == recieverId)).ToList();
+                    .Where(message => (message.ReceiverId == recieverId)).ToList();
             }
         }
  

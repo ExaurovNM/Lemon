@@ -34,7 +34,7 @@ namespace Lemon.WebApp.Services
         }
         public List<Message> LastMessages(int currUserId)
         {
-            var firstPart = messageRepository.GetBySenderId(currUserId).Select(message => message.ReciverId).Distinct();
+            var firstPart = messageRepository.GetBySenderId(currUserId).Select(message => message.ReceiverId).Distinct();
             var secondPart = messageRepository.GetByRecieverId(currUserId).Select(message => message.SenderId).Distinct();
             var allId = firstPart.Union(secondPart);
             List<Message> result = allId.Select(id => this.MessagesBetweenUsers(currUserId, id).Last()).ToList();

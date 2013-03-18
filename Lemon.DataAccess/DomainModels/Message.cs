@@ -1,16 +1,14 @@
-﻿using System;
-namespace Lemon.DataAccess.DomainModels
+﻿namespace Lemon.DataAccess.DomainModels
 {
     public class Message : BaseEntity
     {
         public Message()
         {
-
         }
 
         public Message(int senderId, int recieverId, string text)
         {
-            this.ReciverId = recieverId;
+            this.ReceiverId = recieverId;
             this.SenderId = senderId;
             this.Text = text;
         }
@@ -21,9 +19,8 @@ namespace Lemon.DataAccess.DomainModels
 
         public Account Sender { get; set; }
 
-        public int ReciverId { get; set; }
+        public int ReceiverId { get; set; }
 
-        public Account Reciver { get; set; }
-
+        public Account Receiver { get; set; }
     }
 }

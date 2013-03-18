@@ -23,10 +23,10 @@ namespace Lemon.WebApp.Models
             {
                 return;
             }
-            this.OwnerId = order.AccountId;
+            this.OwnerId = order.CreaterId;
             this.Title = order.Title;
             this.Content = order.Content;
-            this.OwnerDisplayName = order.Account.Email;
+            this.OwnerDisplayName = order.Creater.Email;
             this.CreatedTime = order.CreatedTime;
             this.Id = order.Id;
             this.ProbableCost = order.ProbableCost;

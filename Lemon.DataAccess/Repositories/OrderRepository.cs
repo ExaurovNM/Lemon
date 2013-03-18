@@ -24,7 +24,7 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders.Include("Account").Include("OrderComments").OrderByDescending(order => order.CreatedTime).ToList();
+                return context.Orders.Include("Creater").Include("OrderComments").OrderByDescending(order => order.CreatedTime).ToList();
             }
         }
 
@@ -32,7 +32,7 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders.Include("Account").Include("OrderComments").Include("OrderComments.Author").FirstOrDefault(order => order.Id == id);
+                return context.Orders.Include("Creater").Include("OrderComments").Include("OrderComments.Author").FirstOrDefault(order => order.Id == id);
             }
         }
 
@@ -40,7 +40,7 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders.Include("Account").Include("OrderComments.Author").Where(order => order.AccountId == id).ToList();
+                return context.Orders.Include("Creater").Include("OrderComments.Author").Where(order => order.CreaterId == id).ToList();
             }
         }
 
@@ -58,7 +58,7 @@ namespace Lemon.DataAccess.Repositories
             using (var context = new DataBaseContext())
             {
                 return
-                    context.Orders.Include("Account")
+                    context.Orders.Include("Creater")
                            .Include("OrderComments.Author")
                            .Where(ord => ord.Status == statusId)
                            .OrderByDescending(order => order.CreatedTime)
@@ -84,7 +84,7 @@ namespace Lemon.DataAccess.Repositories
                 return
                     context
                     .Orders
-                    .Include("Account")
+                    .Include("Creater")
                     .Include("OrderComments")
                     .Include("OrderComments.Author")
                     .Where(order => order.Status == orderStatus)

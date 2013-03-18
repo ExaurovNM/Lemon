@@ -43,7 +43,7 @@ namespace Lemon.WebApp.Services
         {
             this.orderCommentRepository.AddCommentToOrder(orderComment);
             var order = orderRepository.GetById(orderComment.OrderId);
-            this.eventsService.AddEvent(orderComment, order.AccountId);
+            this.eventsService.AddEvent(orderComment, order.CreaterId);
         }
 
         public List<Order> GetByUserId(int id)
@@ -78,7 +78,7 @@ namespace Lemon.WebApp.Services
                 return false;
             }
 
-            if (order.AccountId == userId)
+            if (order.CreaterId == userId)
             {
                 return false;
             }
