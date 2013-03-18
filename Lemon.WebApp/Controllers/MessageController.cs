@@ -1,11 +1,9 @@
-﻿using Lemon.DataAccess.DomainModels;
+﻿using System.Linq;
+using System.Web.Mvc;
+
+using Lemon.DataAccess.DomainModels;
 using Lemon.WebApp.Models;
 using Lemon.WebApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Lemon.WebApp.Controllers
 {
@@ -22,26 +20,30 @@ namespace Lemon.WebApp.Controllers
             this.messageService = messageService;
             this.accountService = accountService;
         }
+
         public ActionResult CorrespondenceWithUser(int id)
         {
             if (id != this.authService.GetCurrentUser().Id)
             {
-                List<Message> listOfMessage = this.messageService.MessagesBetweenUsers(
+                var listOfMessage = this.messageService.MessagesBetweenUsers(
                     id, this.authService.GetCurrentUser().Id);
-                string senderEmail = this.authService.GetCurrentUser().Email;
-                string recieverEmail = this.accountService.GetById(id).Email;
-                var messages = new MessagesViewModel(listOfMessage, id, senderEmail, recieverEmail);
+                var senderUserName = this.authService.GetCurrentUser().UserName;
+                var recieverUserName = this.accountService.GetById(id).UserName;
+                var messages = new MessagesViewModel(listOfMessage, id, senderUserName, recieverUserName);
                 return this.View(messages);
             }
-            return this.RedirectToAction("UserProfile", "Account", new { @id = id });
+
+            return this.RedirectToAction("UserProfile", "Account", new { id });
         }
+
         public ActionResult SendMessage(int id)
         {
             if (id != this.authService.GetCurrentUser().Id)
             {
-                return this.View(new CreateMessageModel{recieverId = id});
+                return this.View(new CreateMessageModel { recieverId = id });
             }
-            return this.RedirectToAction("UserProfile", "Account", new { @id = id });
+
+            return this.RedirectToAction("UserProfile", "Account", new { id });
         }
 
         [HttpPost]
@@ -51,6 +53,7 @@ namespace Lemon.WebApp.Controllers
             {
                 messageService.AddMessage(new Message(authService.GetCurrentUser().Id, model.recieverId, model.Text));
             }
+
             return RedirectToAction("CorrespondenceWithUser", "Message", new { @id = model.recieverId });
         }
 
@@ -68,6 +71,7 @@ namespace Lemon.WebApp.Controllers
             {
                 message.UpdateCorrespondence(currentUserId);
             }
+
             return View(model);
         }
     }

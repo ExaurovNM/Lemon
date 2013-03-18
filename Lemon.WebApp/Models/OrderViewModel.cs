@@ -26,14 +26,14 @@ namespace Lemon.WebApp.Models
             this.OwnerId = order.CreaterId;
             this.Title = order.Title;
             this.Content = order.Content;
-            this.OwnerDisplayName = order.Creater.Email;
+            this.OwnerDisplayName = order.Creater.UserName;
             this.CreatedTime = order.CreatedTime;
             this.Id = order.Id;
             this.ProbableCost = order.ProbableCost;
             this.Comments = order.OrderComments == null
                                 ? null
                                 : order.OrderComments.Select(
-                                    comment => new OrderCommentViewModel(comment) { AuthorEmail = comment.Author.Email })
+                                    comment => new OrderCommentViewModel(comment) { AuthorEmail = comment.Author.UserName })
                                        .ToList();
 
             this.OrderStatus = order.Status;

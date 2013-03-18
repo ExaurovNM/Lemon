@@ -12,7 +12,6 @@ namespace Lemon.WebApp.Services
 
     public class AuthService : IAuthService
     {
-        
         private readonly IAccountRepository accountRepository;
         private readonly ICriptoProvider criptoProvider;
 
@@ -22,19 +21,26 @@ namespace Lemon.WebApp.Services
             this.criptoProvider = criptoProvider;
         }
 
-        public void CreateAccount(string email, string password)
+        public void CreateAccount(string userName, string email, string password)
         {
             var existingAccount = accountRepository.GetByEmail(email);
             if (existingAccount != null)
             {
-               throw new ArgumentException("Email is already used");
+                throw new ArgumentException("Email is already used");
+            }
+
+            existingAccount = accountRepository.GetByUserName(userName);
+            if (existingAccount != null)
+            {
+                throw new ArgumentException("UserName is already used");
             }
 
             var salt = Guid.NewGuid().ToString();
             var account = new Account
                 {
-                    Email = email, 
-                    PasswordHash = criptoProvider.ComputeHash(password, salt), 
+                    UserName = userName,
+                    PasswordHash = criptoProvider.ComputeHash(password, salt),
+                    Email = email,
                     Salt = salt
                 };
             accountRepository.Create(account);
@@ -53,7 +59,7 @@ namespace Lemon.WebApp.Services
         {
             var serializeModel = new CustomPrincipalSerializeModel
                 {
-                    Email = account.Email, 
+                    Email = account.UserName,
                     Id = account.Id
                 };
 
@@ -63,12 +69,12 @@ namespace Lemon.WebApp.Services
 
             var authTicket = new FormsAuthenticationTicket(
                      1,
-                     account.Email,
+                     account.UserName,
                      DateTime.Now,
-                     DateTime.Now.AddMinutes(15),
+                     DateTime.Now.AddMinutes(60),
                      remember,
                      userData);
-            
+
             var encTicket = FormsAuthentication.Encrypt(authTicket);
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             HttpContext.Current.Response.Cookies.Add(cookie);

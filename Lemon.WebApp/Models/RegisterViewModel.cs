@@ -4,8 +4,12 @@
 
     public class RegisterViewModel
     {
-        [Display(Name = "Емейл")]
-        [Required(ErrorMessage = "Введите емейл")]
+        [Display(Name = "Логин")]
+        [Required(ErrorMessage = "Введите логин")]
+        public string UserName { get; set; }
+
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Введите email")]
         public string Email { get; set; }
 
         [Display(Name = "Пароль")]

@@ -17,11 +17,11 @@ namespace Lemon.DataAccess.Repositories
             }
         }
 
-        public Account GetByEmail(string email)
+        public Account GetByUserName(string email)
         {
             using (var context = new DataBaseContext())
             {
-                return context.Accounts.FirstOrDefault(account => account.Email == email);
+                return context.Accounts.FirstOrDefault(account => account.UserName == email);
             }
         }
 
@@ -40,6 +40,14 @@ namespace Lemon.DataAccess.Repositories
             using (var context = new DataBaseContext())
             {
                 return context.Accounts.FirstOrDefault(account => account.Id == id);
+            }
+        }
+
+        public Account GetByEmail(string email)
+        {
+            using (var context = new DataBaseContext())
+            {
+                return context.Accounts.FirstOrDefault(account => account.Email.ToLower() == email.ToLower());
             }
         }
     }

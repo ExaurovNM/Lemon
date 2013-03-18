@@ -8,6 +8,7 @@ create table Accounts(
 	Id int identity(1,1),
 	CreatedTime datetime NOT NULL,
 	
+	UserName nvarchar(128) NOT NULL,
 	Email nvarchar(128) NOT NULL,
 	PasswordHash nvarchar(256) NOT NULL,
 	Salt nvarchar(256) NOT NULL,

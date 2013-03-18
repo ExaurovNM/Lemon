@@ -33,11 +33,11 @@ namespace Lemon.WebApp.Controllers
             {
                 try
                 {
-                    authService.CreateAccount(model.Email, model.Password);
+                    authService.CreateAccount(model.UserName, model.Email, model.Password);
                 }
                 catch (ArgumentException)
                 {
-                    ModelState.AddModelError("Email", "Этот e-mail уже используется.");
+                    ModelState.AddModelError("UserName", "Этот e-mail уже используется.");
                     return View(model);
                 }
 
@@ -55,6 +55,7 @@ namespace Lemon.WebApp.Controllers
         [HttpPost]
         public ActionResult Logon(LogonViewModel model)
         {
+            var t = TimeSpan.FromMilliseconds(3217778324);
             if (ModelState.IsValid)
             {
                 if (authService.Validate(model.Email, model.Password))

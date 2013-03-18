@@ -11,7 +11,7 @@ namespace Lemon.WebApp.Models
             this.Description = evend.Description;
             this.EventPublisherId = evend.EventPublisherId;
             this.EventType = evend.EventType;
-            this.EventPublisherName = evend.EventPublisher.Email;
+            this.EventPublisherName = evend.EventPublisher.UserName;
             this.Time = evend.CreatedTime;
         }
 

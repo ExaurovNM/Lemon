@@ -8,10 +8,12 @@
     {
         IEnumerable<Account> Items();
 
-        Account GetByEmail(string email);
+        Account GetByUserName(string email);
 
         void Create(Account account);
 
         Account GetById(int id);
+
+        Account GetByEmail(string email);
     }
 }

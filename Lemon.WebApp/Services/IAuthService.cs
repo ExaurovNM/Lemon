@@ -4,7 +4,7 @@ namespace Lemon.WebApp.Services
 
     public interface IAuthService
     {
-        void CreateAccount(string email, string password);
+        void CreateAccount(string userName, string email, string password);
 
         void Logon(string email, bool remember = false);
 

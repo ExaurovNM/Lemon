@@ -12,8 +12,8 @@ namespace Lemon.WebApp.Models
             Created = message.CreatedTime;
             ReciverId = message.ReceiverId;
             SenderId = message.SenderId;
-            SenderEmail = message.Sender.Email;
-            ReciverEmail = message.Receiver.Email;
+            SenderEmail = message.Sender.UserName;
+            ReciverEmail = message.Receiver.UserName;
         }
 
         public string Text { get; set; }
