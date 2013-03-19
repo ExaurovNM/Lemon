@@ -56,8 +56,12 @@ namespace Lemon.WebApp.Controllers
             var order = orderService.GetById(id);
             var user = authService.GetCurrentUser();
             var canComment = orderService.IsCanComment(user.Id, id);
-            var model = new OrderViewModel(order, canComment);
-            model.IsOwnOrder = this.authService.GetCurrentUser().Id == order.CreaterId;
+            var model = new OrderViewModel(order, canComment)
+                {
+                    IsOwnOrder = this.authService.GetCurrentUser().Id == order.CreaterId,
+                    IsErrorMessage = TempData.ContainsKey("IsError") ? (bool?)TempData["IsError"] : null,
+                    UserMessage = (string)TempData["AddCommentMessage"]
+                };
             return View(model);
         }
 
@@ -70,8 +74,15 @@ namespace Lemon.WebApp.Controllers
             {
                 var domain = model.ConvertToDomain();
                 domain.AuthorId = authService.GetCurrentUser().Id;
-                orderService.AddCommentToOrder(domain);
-                return RedirectToAction("Details", "Order", new { @id = model.OrderId });
+                if (orderService.AddCommentToOrder(domain))
+                {
+                    TempData.Add("AddCommentMessage", "Cпасибо! Комментарий успешно добавлен.");
+                    TempData.Add("IsError", false);
+                    return RedirectToAction("Details", "Order", new { @id = model.OrderId });
+                }
+
+                TempData.Add("AddCommentMessage", "Невозможно добавить комментарий: заказ не открыт.");
+                TempData.Add("IsError", true);
             }
 
             return RedirectToAction("Details", "Order", new { @id = model.OrderId });

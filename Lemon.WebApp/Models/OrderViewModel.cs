@@ -23,6 +23,7 @@ namespace Lemon.WebApp.Models
             {
                 return;
             }
+
             this.OwnerId = order.CreaterId;
             this.Title = order.Title;
             this.Content = order.Content;
@@ -63,10 +64,15 @@ namespace Lemon.WebApp.Models
         }
 
         public int Id { get; set; }
+
         public bool IsCanComment { get; set; }
 
         public bool IsOwnOrder { get; set; }
 
         public int OrderStatus { get; set; }
+
+        public bool? IsErrorMessage { get; set; }
+
+        public string UserMessage { get; set; }
     }
 }
