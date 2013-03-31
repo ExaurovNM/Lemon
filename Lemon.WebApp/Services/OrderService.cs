@@ -39,11 +39,16 @@ namespace Lemon.WebApp.Services
             return this.orderRepository.GetById(id);
         }
 
-        public void AddCommentToOrder(OrderComment orderComment)
+        public bool AddCommentToOrder(OrderComment orderComment)
         {
-            this.orderCommentRepository.AddCommentToOrder(orderComment);
             var order = orderRepository.GetById(orderComment.OrderId);
-            this.eventsService.AddEvent(orderComment, order.CreaterId);
+            if (order.Status == OrderStatus.Openned)
+            {
+                this.orderCommentRepository.AddCommentToOrder(orderComment);
+                this.eventsService.AddEvent(orderComment, order.CreaterId);
+                return true;
+            }
+            return false;
         }
 
         public List<Order> GetByUserId(int id)

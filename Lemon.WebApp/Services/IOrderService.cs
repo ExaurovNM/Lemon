@@ -12,7 +12,7 @@
 
         Order GetById(int id);
 
-        void AddCommentToOrder(OrderComment orderComment);
+        bool AddCommentToOrder(OrderComment orderComment);
 
         List<Order> GetByUserId(int id);
 

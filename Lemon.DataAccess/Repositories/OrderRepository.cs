@@ -32,7 +32,11 @@ namespace Lemon.DataAccess.Repositories
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders.Include("Creater").Include("OrderComments").Include("OrderComments.Author").FirstOrDefault(order => order.Id == id);
+                return context.Orders
+                    .Include("Creater")
+                    .Include("OrderComments")
+                    .Include("OrderComments.Author")
+                    .FirstOrDefault(order => order.Id == id);
             }
         }
 
