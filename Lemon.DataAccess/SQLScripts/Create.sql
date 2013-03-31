@@ -66,7 +66,6 @@ create table UserRatings(
 	Id int Identity(1,1),
 	CreatedTime datetime NOT NULL,
 	
-	[Text] nvarchar(2048) NOT NULL,
 	RatingSenderId int NOT NULL,
 	RatingReceiverId int NOT NULL,
 	Rating bit NOT NULL,

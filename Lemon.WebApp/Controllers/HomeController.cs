@@ -22,7 +22,6 @@ namespace Lemon.WebApp.Controllers
         [HttpGet]
         public ActionResult Index(string searchQuery, int page = 1)
         {
-            var tt = TimeSpan.FromMilliseconds(32177783.24);
             var allOrders = this.orderService.GetBySearchString(searchQuery, DefaultPageSize, page);
             var model = new MainPageViewModel
                 {
